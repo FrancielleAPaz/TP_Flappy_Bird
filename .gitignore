@@ -1,0 +1,20 @@
+# Ignorar binários e objetos
+bin/
+obj/
+*.o
+
+# Ignorar arquivos temporários
+*.log
+*.tmp
+*.swp
+*.bak
+
+# Ignorar executável direto (caso seja gerado fora da pasta bin/)
+flappybird
+
+# Ignorar arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Ignorar pastas ocultas do VS Code (opcional)
+.vscode/
