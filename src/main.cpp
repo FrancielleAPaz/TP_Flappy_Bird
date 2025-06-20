@@ -10,12 +10,17 @@ int main() {
 
     al_init_primitives_addon(); // Inicializa o addon para desenhar primitivas (linhas, círculos, etc.)
 
-    ALLEGRO_DISPLAY* display = al_create_display(640, 480);
+    ALLEGRO_DISPLAY* display = al_create_display(1000, 600);
     if (!display) {
         std::cerr << "Erro ao criar a janela do jogo!" << std::endl;
         return -1;
     }
 
+    al_set_window_position(al_create_display(1000, 600), 0, 0);
+    ALLEGRO_TIMER *timer = NULL;
+    timer = al_create_timer(1.0 / 30.0);
+    al_start_timer(timer);
+    
     al_clear_to_color(al_map_rgb(135, 206, 235)); // Cor azul do céu
     al_draw_filled_circle(320, 240, 50, al_map_rgb(255, 255, 0)); // Um "sol"
     al_flip_display();
