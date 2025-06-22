@@ -134,8 +134,16 @@ void Scenario::reset() {
 void Scenario::addPipe() {
     int alturaAleatoria = 150 + (std::rand() % 200); // entre 150 e 350
 
+    // Carrega as imagens dos canos (apenas uma vez)
+    static ALLEGRO_BITMAP* topPipeImage = al_load_bitmap("assets/pipe_top.png");
+    static ALLEGRO_BITMAP* bottomPipeImage = al_load_bitmap("assets/pipe_bottom.png");
+
     auto pipeTop = std::make_shared<Pipe>(1000, alturaAleatoria - spaceBetweenPipes, true);
     auto pipeBottom = std::make_shared<Pipe>(1000, alturaAleatoria, false);
+
+    // Configura a velocidade
+    pipeTop->setSpeed(-pipeSpeed);
+    pipeBottom->setSpeed(-pipeSpeed);
 
     pipes.push_back(pipeTop);
     pipes.push_back(pipeBottom);
