@@ -13,39 +13,7 @@
 Scenario::Scenario() {
     std::cout << "[INFO] Inicializando cenário..." << std::endl;
 
-    ALLEGRO_BITMAP* birdImage = al_load_bitmap("../assets/birds.png");
-    if (!birdImage) {
-        std::cerr << "[ERRO] falha ao carregar birds.png\n";
-        exit(1); // Aborta o programa imediatamente
-    }
-    bird = std::make_shared<Bird>(500, 300, birdImage);
-
-    font = al_load_font("../assets/flappyfont.ttf", 36, 0);
-    if (!font) std::cerr << "[ERRO] falha ao carregar flappyfont.ttf\n";
-
-    background = al_load_bitmap("../assets/background.bmp");
-    if (!background) std::cerr << "[ERRO] falha ao carregar background.bmp\n";
-
-    logo = al_load_bitmap("../assets/logo.bmp");
-    if (!logo) std::cerr << "[ERRO] falha ao carregar logo.bmp\n";
-
-    button_play = al_load_bitmap("../assets/button_play.png");
-    if (!button_play) std::cerr << "[ERRO] falha ao carregar button_play.png\n";
-
-    gameover_image = al_load_bitmap("../assets/gameover.png");
-    if (!gameover_image) std::cerr << "[ERRO] falha ao carregar gameover.png\n";
-
-    floor_image = al_load_bitmap("../assets/ground.png");
-    if (!floor_image) std::cerr << "[ERRO] falha ao carregar ground.png\n";
-
-    topPipeImage = al_load_bitmap("../assets/tunnel_up.png");
-    if (!topPipeImage) std::cerr << "[ERRO] falha ao carregar tunnel_up.png\n";
-
-    bottomPipeImage = al_load_bitmap("../assets/tunnel_down.png");
-    if (!bottomPipeImage) std::cerr << "[ERRO] falha ao carregar tunnel_down.png\n";
-
-    std::cout << "[INFO] Cenário carregado com sucesso (se nenhum erro acima apareceu).\n";
-
+    // Somente valores iniciais
     score = 0;
     gravity = 0.5f;
     pipeSpeed = 4.0f;
@@ -54,7 +22,34 @@ Scenario::Scenario() {
     addScoreFlag = false;
     cx1 = 0;
     cx2 = 1000;
+
+    // O carregamento real vem depois...
 }
+
+bool Scenario::carregarRecursos() {
+    font = al_load_font("./assets/flappyfont.ttf", 36, 0);
+    background = al_load_bitmap("./assets/background.bmp");
+    logo = al_load_bitmap("./assets/logo.bmp");
+    button_play = al_load_bitmap("./assets/button_play.png");
+    gameover_image = al_load_bitmap("./assets/gameover.png");
+    floor_image = al_load_bitmap("./assets/ground.png");
+    topPipeImage = al_load_bitmap("./assets/tunnel_up.png");
+    bottomPipeImage = al_load_bitmap("./assets/tunnel_down.png");
+    birdImage = al_load_bitmap("./assets/birds.png");
+
+    if (!font || !background || !logo || !button_play || !gameover_image ||
+        !floor_image || !topPipeImage || !bottomPipeImage || !birdImage) {
+        std::cerr << "[ERRO] Falha ao carregar um ou mais recursos gráficos do jogo.\n";
+        if (!birdImage) std::cerr << "[ERRO] Falha ao carregar birds.png\n";
+        return false;
+    }
+
+    bird = std::make_shared<Bird>(500, 300, birdImage);
+
+    return true;
+}
+
+
 
 
 // Destrutor
@@ -120,6 +115,7 @@ void Scenario::update() {
 // Desenha os elementos do jogo
 void Scenario::draw(GameState state) {
     al_draw_bitmap(background, 0, 0, 0);
+    al_draw_bitmap(background, 480, 0, 0);
 
     switch (state) {
     case GameState::INICIO:
@@ -145,8 +141,8 @@ void Scenario::draw(GameState state) {
     }
 
     // Chão em movimento
-    al_draw_bitmap(floor_image, cx1, 500, 0);
-    al_draw_bitmap(floor_image, cx2, 500, 0);
+    al_draw_bitmap(floor_image, 0, 473, 0);   // 600 - 127 = 473 (encaixa certinho na base da janela)
+    al_draw_bitmap(floor_image, 480, 473, 0); // segunda metade
 
     al_flip_display();
 }

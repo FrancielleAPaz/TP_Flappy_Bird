@@ -23,9 +23,9 @@ private:
     ALLEGRO_DISPLAY* display;
     ALLEGRO_EVENT_QUEUE* event_queue;
     ALLEGRO_TIMER* timer;
-    ALLEGRO_SAMPLE* som_pulo;
-    ALLEGRO_SAMPLE* som_morte;
-    ALLEGRO_AUDIO_STREAM* trilha;
+    // ALLEGRO_SAMPLE* som_pulo;
+    // ALLEGRO_SAMPLE* som_morte;
+    // ALLEGRO_AUDIO_STREAM* trilha;
 
     bool running;
 

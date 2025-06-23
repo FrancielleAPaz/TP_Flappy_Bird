@@ -37,6 +37,7 @@ private:
     ALLEGRO_BITMAP* button_play;
     ALLEGRO_BITMAP* topPipeImage;
     ALLEGRO_BITMAP* bottomPipeImage;
+    ALLEGRO_BITMAP* birdImage;
 
     // Coordenadas e tamanhos do button_play
     float playBtnX = 440;

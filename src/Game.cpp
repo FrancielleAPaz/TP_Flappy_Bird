@@ -17,13 +17,20 @@ Game::Game() {
     al_init_primitives_addon();
     al_install_audio();
     al_init_acodec_addon();
+    al_install_mouse();
 
     // Criar display (al_create_display)
-    display = al_create_display(1000, 600);
+    display = al_create_display(960, 600);
     if (!display) {
         al_show_native_message_box(nullptr, "Erro", "Display", "Falha ao criar display", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
         exit(1);
     }
+
+    if (!scenario.carregarRecursos()) {
+    al_show_native_message_box(display, "Erro", "Recursos", "Falha ao carregar recursos gráficos", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
+    exit(1);
+    }
+
 
     // Criar fila de eventos e timer (al_create_event_queue, al_create_timer)
     timer = al_create_timer(1.0 / 30.0); // 30 FPS recomendado pelo professor
@@ -32,24 +39,35 @@ Game::Game() {
     // Registrar fontes de evento (teclado, display, timer)
     al_register_event_source(event_queue, al_get_keyboard_event_source());
     al_register_event_source(event_queue, al_get_display_event_source(display));
-    al_register_event_source(event_queue, al_get_timer_event_source(timer));    
+    al_register_event_source(event_queue, al_get_timer_event_source(timer));  
+    al_register_event_source(event_queue, al_get_mouse_event_source());
+  
 
     // Definir estado inicial como GameState::INICIO
     currentState = GameState::INICIO;
 
     running = true;
 
-    som_pulo = al_load_sample("..assets/sound/jump.mp3");
-    som_morte = al_load_sample("..assets/sound/dead.ogg");
-    trilha = al_load_audio_stream("..assets/sound/trilha.wav", 4, 2048);
+    // som_pulo = al_load_sample(".assets/sound/jump.mp3");
+    // som_morte = al_load_sample(".assets/sound/dead.ogg");
+    // trilha = al_load_audio_stream(".assets/sound/trilha.wav", 4, 2048);
 
-    if (!som_pulo || !som_morte || !trilha) {
-        std::cerr << "[ERRO] Falha ao carregar algum dos arquivos de áudio.\n";
+    // if (!som_pulo) std::cerr << "[ERRO] Não foi possível carregar jump.mp3\n";
+    // if (!som_morte) std::cerr << "[ERRO] Não foi possível carregar dead.ogg\n";
+    // if (!trilha) std::cerr << "[ERRO] Não foi possível carregar trilha.wav\n";
+
+    // if (!som_pulo || !som_morte || !trilha) {
+    //     std::cerr << "[ERRO] Falha ao carregar algum dos arquivos de áudio.\n";
+    //     exit(1);
+    // }
+
+    // al_attach_audio_stream_to_mixer(trilha, al_get_default_mixer());
+    // al_set_audio_stream_playmode(trilha, ALLEGRO_PLAYMODE_LOOP);
+
+    if (!scenario.carregarRecursos()) {
+        al_show_native_message_box(nullptr, "Erro", "Recursos", "Falha ao carregar recursos gráficos do cenário.", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
         exit(1);
     }
-
-    al_attach_audio_stream_to_mixer(trilha, al_get_default_mixer());
-    al_set_audio_stream_playmode(trilha, ALLEGRO_PLAYMODE_LOOP);
 }
 
 // Destrutor: libera memória e destrói objetos Allegro
@@ -58,9 +76,9 @@ Game::~Game() {
     al_destroy_timer(timer);
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
-    al_destroy_sample(som_pulo);
-    al_destroy_sample(som_morte);
-    al_destroy_audio_stream(trilha);
+    // al_destroy_sample(som_pulo);
+    // al_destroy_sample(som_morte);
+    // al_destroy_audio_stream(trilha);
 
 }
 
@@ -111,7 +129,7 @@ void Game::run(const std::string& apelido) {
 void Game::handleInput(int keycode) {
     // Configurando para tocar o som jump.mp3 ao pressionar space
     if (keycode == ALLEGRO_KEY_SPACE) {
-    al_play_sample(som_pulo, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+    //al_play_sample(som_pulo, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
     scenario.getBird()->jump();
     }
 
@@ -156,7 +174,7 @@ void Game::handleInput(int keycode) {
 // Mostra tela de game over, muda estado para PERDEU
 void Game::showGameOver() {
     // Configurando som de morte no momento em que o jogador perder
-    al_play_sample(som_morte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+   // al_play_sample(som_morte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
     currentState = GameState::PERDEU;
 }
 
