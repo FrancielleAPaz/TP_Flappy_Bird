@@ -1,0 +1,27 @@
+\doxysection{Game\+Object.\+hpp}
+\hypertarget{_game_object_8hpp_source}{}\label{_game_object_8hpp_source}\index{include/GameObject.hpp@{include/GameObject.hpp}}
+\mbox{\hyperlink{_game_object_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00004\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00005\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_ad4976cd29785cf9bd791148ff397c41e}{x}};\ \ \textcolor{comment}{//\ Posição\ X\ no\ cenário}}
+\DoxyCodeLine{00006\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a9ac54f1c686ecf5656139a829ed62041}{y}};\ \ \textcolor{comment}{//\ Posição\ Y\ no\ cenário}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ \mbox{\hyperlink{class_game_object_ae7a80374287aa8ae7253a990235e9bc7}{GameObject}}(\textcolor{keywordtype}{float}\ startX,\ \textcolor{keywordtype}{float}\ startY);}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{class_game_object_a67ae2fa6e7916c799700cd659975d8ea}{\string~GameObject}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{comment}{//\ Métodos\ virtuais\ puros\ (interface\ polimórfica)}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_ae83128d0e0efef691417779605ee037c}{update}}()\ =\ 0;\ \ \textcolor{comment}{//\ Atualiza\ o\ estado\ do\ objeto}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_object_a05e5306f4307d451cdbf41d83a953642}{draw}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_game_object_ac8a27a857842bb635e32b7281d98af2b}{checkCollision}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_game_object}{GameObject}}\&\ other)\ \textcolor{keyword}{const}\ =\ 0;\ \ \textcolor{comment}{//\ Verifica\ colisão}}
+\DoxyCodeLine{00016\ \ \ \ \ }
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Métodos\ concretos\ para\ acesso\ às\ propriedades}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_abe61df236efb58849b29d242d87fc59f}{getX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a3f55728263b9ce2407459d14b9861b04}{getY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00020\ \ \ \ \ }
+\DoxyCodeLine{00021\ \};}
+
+\end{DoxyCode}

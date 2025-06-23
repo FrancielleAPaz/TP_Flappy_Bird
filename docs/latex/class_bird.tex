@@ -1,0 +1,162 @@
+\doxysection{Bird Class Reference}
+\hypertarget{class_bird}{}\label{class_bird}\index{Bird@{Bird}}
+
+
+{\ttfamily \#include $<$Bird.\+hpp$>$}
+
+Inheritance diagram for Bird\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_bird}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_bird_a40fdabf18beaf976b1a9dc9b9763c303}{Bird}} (float startX, float startY, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}sprite)
+\item 
+void \mbox{\hyperlink{class_bird_aeb4af5af51374ccfdf3e9a5aaf40c7b6}{apply\+Gravity}} (float gravity)
+\item 
+void \mbox{\hyperlink{class_bird_ae295f7338e168cd216a569d07866743c}{update}} () override
+\item 
+void \mbox{\hyperlink{class_bird_ad88ff6df269c029bb1519f4e8ebc598a}{draw}} () const override
+\item 
+bool \mbox{\hyperlink{class_bird_aada45d9d87c71368e277554b0ccc6f10}{check\+Collision}} (const \mbox{\hyperlink{class_game_object}{Game\+Object}} \&other) const override
+\item 
+void \mbox{\hyperlink{class_bird_a0d0d4bde95fabd21363c2e905aa1fefc}{kill}} ()
+\item 
+void \mbox{\hyperlink{class_bird_aaf8f7cdda8f072ee9d2643da8dc71ad6}{jump}} ()
+\item 
+void \mbox{\hyperlink{class_bird_a89d40831dcd54751b9507f51bb98b4f6}{reset}} ()
+\item 
+bool \mbox{\hyperlink{class_bird_a3ac9f019b69bbafb279d3e93988d4dc1}{is\+Dead}} () const
+\item 
+float \mbox{\hyperlink{class_bird_a77ace36051e1d9268c45eb97ef1118a9}{get\+VelocityY}} () const
+\item 
+float \mbox{\hyperlink{class_bird_a2ee1e7b5f045e4bd38c126a9cca1c52d}{get\+Width}} () const
+\item 
+float \mbox{\hyperlink{class_bird_aa883a691f829aa114d9ab421d942162c}{get\+Height}} () const
+\item 
+void \mbox{\hyperlink{class_bird_aec25f2e05e3668df8396ba77bb897d1f}{set\+Animation\+Speed}} (float speed)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_object_ae7a80374287aa8ae7253a990235e9bc7}{Game\+Object}} (float startX, float startY)
+\item 
+virtual \mbox{\hyperlink{class_game_object_a67ae2fa6e7916c799700cd659975d8ea}{\texorpdfstring{$\sim$}{\string~}\+Game\+Object}} ()=default
+\item 
+float \mbox{\hyperlink{class_game_object_abe61df236efb58849b29d242d87fc59f}{getX}} () const
+\item 
+float \mbox{\hyperlink{class_game_object_a3f55728263b9ce2407459d14b9861b04}{getY}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_game_object_ad4976cd29785cf9bd791148ff397c41e}{x}}
+\item 
+float \mbox{\hyperlink{class_game_object_a9ac54f1c686ecf5656139a829ed62041}{y}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_bird_a40fdabf18beaf976b1a9dc9b9763c303}\label{class_bird_a40fdabf18beaf976b1a9dc9b9763c303} 
+\index{Bird@{Bird}!Bird@{Bird}}
+\index{Bird@{Bird}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{Bird()}{Bird()}}
+{\footnotesize\ttfamily Bird\+::\+Bird (\begin{DoxyParamCaption}\item[{float}]{startX,  }\item[{float}]{startY,  }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{sprite }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_bird_aeb4af5af51374ccfdf3e9a5aaf40c7b6}\label{class_bird_aeb4af5af51374ccfdf3e9a5aaf40c7b6} 
+\index{Bird@{Bird}!applyGravity@{applyGravity}}
+\index{applyGravity@{applyGravity}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{applyGravity()}{applyGravity()}}
+{\footnotesize\ttfamily void Bird\+::apply\+Gravity (\begin{DoxyParamCaption}\item[{float}]{gravity }\end{DoxyParamCaption})}
+
+\Hypertarget{class_bird_aada45d9d87c71368e277554b0ccc6f10}\label{class_bird_aada45d9d87c71368e277554b0ccc6f10} 
+\index{Bird@{Bird}!checkCollision@{checkCollision}}
+\index{checkCollision@{checkCollision}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{checkCollision()}{checkCollision()}}
+{\footnotesize\ttfamily bool Bird\+::check\+Collision (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_ac8a27a857842bb635e32b7281d98af2b}{Game\+Object}}.
+
+\Hypertarget{class_bird_ad88ff6df269c029bb1519f4e8ebc598a}\label{class_bird_ad88ff6df269c029bb1519f4e8ebc598a} 
+\index{Bird@{Bird}!draw@{draw}}
+\index{draw@{draw}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Bird\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_a05e5306f4307d451cdbf41d83a953642}{Game\+Object}}.
+
+\Hypertarget{class_bird_aa883a691f829aa114d9ab421d942162c}\label{class_bird_aa883a691f829aa114d9ab421d942162c} 
+\index{Bird@{Bird}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily float Bird\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_bird_a77ace36051e1d9268c45eb97ef1118a9}\label{class_bird_a77ace36051e1d9268c45eb97ef1118a9} 
+\index{Bird@{Bird}!getVelocityY@{getVelocityY}}
+\index{getVelocityY@{getVelocityY}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{getVelocityY()}{getVelocityY()}}
+{\footnotesize\ttfamily float Bird\+::get\+VelocityY (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_bird_a2ee1e7b5f045e4bd38c126a9cca1c52d}\label{class_bird_a2ee1e7b5f045e4bd38c126a9cca1c52d} 
+\index{Bird@{Bird}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily float Bird\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_bird_a3ac9f019b69bbafb279d3e93988d4dc1}\label{class_bird_a3ac9f019b69bbafb279d3e93988d4dc1} 
+\index{Bird@{Bird}!isDead@{isDead}}
+\index{isDead@{isDead}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{isDead()}{isDead()}}
+{\footnotesize\ttfamily bool Bird\+::is\+Dead (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_bird_aaf8f7cdda8f072ee9d2643da8dc71ad6}\label{class_bird_aaf8f7cdda8f072ee9d2643da8dc71ad6} 
+\index{Bird@{Bird}!jump@{jump}}
+\index{jump@{jump}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{jump()}{jump()}}
+{\footnotesize\ttfamily void Bird\+::jump (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_bird_a0d0d4bde95fabd21363c2e905aa1fefc}\label{class_bird_a0d0d4bde95fabd21363c2e905aa1fefc} 
+\index{Bird@{Bird}!kill@{kill}}
+\index{kill@{kill}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{kill()}{kill()}}
+{\footnotesize\ttfamily void Bird\+::kill (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_bird_a89d40831dcd54751b9507f51bb98b4f6}\label{class_bird_a89d40831dcd54751b9507f51bb98b4f6} 
+\index{Bird@{Bird}!reset@{reset}}
+\index{reset@{reset}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void Bird\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_bird_aec25f2e05e3668df8396ba77bb897d1f}\label{class_bird_aec25f2e05e3668df8396ba77bb897d1f} 
+\index{Bird@{Bird}!setAnimationSpeed@{setAnimationSpeed}}
+\index{setAnimationSpeed@{setAnimationSpeed}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{setAnimationSpeed()}{setAnimationSpeed()}}
+{\footnotesize\ttfamily void Bird\+::set\+Animation\+Speed (\begin{DoxyParamCaption}\item[{float}]{speed }\end{DoxyParamCaption})}
+
+\Hypertarget{class_bird_ae295f7338e168cd216a569d07866743c}\label{class_bird_ae295f7338e168cd216a569d07866743c} 
+\index{Bird@{Bird}!update@{update}}
+\index{update@{update}!Bird@{Bird}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Bird\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_ae83128d0e0efef691417779605ee037c}{Game\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_bird_8hpp}{Bird.\+hpp}}\item 
+src/\mbox{\hyperlink{_bird_8cpp}{Bird.\+cpp}}\end{DoxyCompactItemize}
