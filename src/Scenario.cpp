@@ -17,11 +17,10 @@ Scenario::Scenario() {
     score = 0;
     gravity = 0.5f;
     pipeSpeed = 4.0f;
-    spaceBetweenPipes = 220.f;
+    spaceBetweenPipes = 180.f;
     pipeSpawnCounter = 0;
     addScoreFlag = false;
-    cx1 = 0;
-    cx2 = 1000;
+    lastGapY = 250;
 
     // O carregamento real vem depois...
 }
@@ -32,13 +31,11 @@ bool Scenario::carregarRecursos() {
     logo = al_load_bitmap("./assets/logo.bmp");
     button_play = al_load_bitmap("./assets/button_play.png");
     gameover_image = al_load_bitmap("./assets/gameover.png");
-    floor_image = al_load_bitmap("./assets/ground.png");
     topPipeImage = al_load_bitmap("./assets/tunnel_up.png");
     bottomPipeImage = al_load_bitmap("./assets/tunnel_down.png");
     birdImage = al_load_bitmap("./assets/birds.png");
 
-    if (!font || !background || !logo || !button_play || !gameover_image ||
-        !floor_image || !topPipeImage || !bottomPipeImage || !birdImage) {
+    if (!font || !background || !logo || !button_play || !gameover_image || !topPipeImage || !bottomPipeImage || !birdImage) {
         std::cerr << "[ERRO] Falha ao carregar um ou mais recursos gráficos do jogo.\n";
         if (!birdImage) std::cerr << "[ERRO] Falha ao carregar birds.png\n";
         return false;
@@ -59,10 +56,9 @@ Scenario::~Scenario() {
     if (logo) al_destroy_bitmap(logo);
     if (button_play) al_destroy_bitmap(button_play);
     if (gameover_image) al_destroy_bitmap(gameover_image);
-    if (floor_image) al_destroy_bitmap(floor_image);
     if (topPipeImage) al_destroy_bitmap(topPipeImage);
     if (bottomPipeImage) al_destroy_bitmap(bottomPipeImage);
-
+    if (birdImage) al_destroy_bitmap(birdImage);
 }
 
 // Retorna o ponteiro para o pássaro
@@ -104,12 +100,6 @@ void Scenario::update() {
         pipeSpawnCounter = 0;
         addScoreFlag = false;
     }
-
-    // Atualiza chão (scroll horizontal)
-    cx1 -= pipeSpeed;
-    cx2 -= pipeSpeed;
-    if (cx1 <= -1000) cx1 = 1000;
-    if (cx2 <= -1000) cx2 = 1000;
 }
 
 // Desenha os elementos do jogo
@@ -140,10 +130,6 @@ void Scenario::draw(GameState state) {
         break;
     }
 
-    // Chão em movimento
-    al_draw_bitmap(floor_image, 0, 473, 0);   // 600 - 127 = 473 (encaixa certo na base da janela)
-    al_draw_bitmap(floor_image, 480, 473, 0); // segunda metade
-
     al_flip_display();
 }
 
@@ -154,37 +140,39 @@ void Scenario::reset() {
     pipeSpawnCounter = 0;
     addScoreFlag = false;
     bird->reset();
-    cx1 = 0;
-    cx2 = 1000;
 }
 
 // Adiciona um novo par de canos na tela
 void Scenario::addPipe() {
-    int screenHeight = 600;
-    int floorHeight = 127;
-    int gapSize = static_cast<int>(spaceBetweenPipes); // 220
+    int delta = (std::rand() % 361) - 180;  // [-180, 180]
+    int gapY = lastGapY + delta;
 
-    // Calcula altura máxima possível para o topo do buraco
-    int maxGapY = screenHeight - floorHeight - gapSize; 
+    // Agora gapY representa o centro do buraco
+    int gapSize = static_cast<int>(spaceBetweenPipes);
 
-    // Valor aleatório para o topo do buraco
-    int gapY = 10 + (std::rand() % (maxGapY - 10 + 1));
+    // Limites para evitar que o buraco fique fora da tela
+    int minGapY = gapSize / 2 + 30;
+    int maxGapY = 600 - gapSize / 2 - 30;
+
+    if (gapY < minGapY) gapY = minGapY;
+    if (gapY > maxGapY) gapY = maxGapY;
+
+    lastGapY = gapY;
 
     auto pipeTop = std::make_shared<Pipe>(
-        1000,                        // posição X (fora da tela)
-        gapY - al_get_bitmap_height(topPipeImage), // y começa acima do "buraco"
+        960,
+        gapY - gapSize / 2 - al_get_bitmap_height(topPipeImage),
         true,
         topPipeImage
     );
 
     auto pipeBottom = std::make_shared<Pipe>(
-        1000,                        // mesma posição X
-        gapY + gapSize,             // começa após o "buraco"
+        960,
+        gapY + gapSize / 2,
         false,
         bottomPipeImage
     );
 
-    // Configura a velocidade
     pipeTop->setSpeed(-pipeSpeed);
     pipeBottom->setSpeed(-pipeSpeed);
 

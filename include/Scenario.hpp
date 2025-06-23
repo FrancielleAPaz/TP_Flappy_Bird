@@ -28,11 +28,11 @@ private:
     float spaceBetweenPipes;
     int pipeSpawnCounter;
     bool addScoreFlag;
+    int lastGapY;
 
     ALLEGRO_BITMAP* background;
     ALLEGRO_BITMAP* logo;
     ALLEGRO_BITMAP* gameover_image;
-    ALLEGRO_BITMAP* floor_image;
     ALLEGRO_FONT* font;
     ALLEGRO_BITMAP* button_play;
     ALLEGRO_BITMAP* topPipeImage;
@@ -45,7 +45,6 @@ private:
     float playBtnW = 120;
     float playBtnH = 60;
 
-    int cx1, cx2; // Para o movimento do chão
 
 public:
     Scenario();
