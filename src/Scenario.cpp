@@ -119,8 +119,8 @@ void Scenario::draw(GameState state) {
 
     switch (state) {
     case GameState::INICIO:
-        al_draw_scaled_bitmap(logo, 0, 0, 95, 28, 400, 100, 180, 58, 0);
-        al_draw_scaled_bitmap(button_play, 0, 0, 366, 204, 440, 200, 120, 60, 0);
+        al_draw_scaled_bitmap(logo, 0, 0, 95, 28, 382, 160, 180, 58, 0);
+        al_draw_scaled_bitmap(button_play, 0, 0, 366, 204, 419, 230, 120, 60, 0);
         break;
 
     case GameState::JOGANDO:
@@ -134,14 +134,14 @@ void Scenario::draw(GameState state) {
         for (auto& pipe : pipes)
             pipe->draw();
         bird->draw();
-        al_draw_bitmap(gameover_image, 350, 200, 0);
-        al_draw_scaled_bitmap(button_play, 0, 0, 366, 204, 440, 350, 120, 60, 0);
+        al_draw_bitmap(gameover_image, 315, 200, 0);
+        al_draw_scaled_bitmap(button_play, 0, 0, 366, 204, 419, 290, 120, 60, 0);
         al_draw_textf(font, al_map_rgb(255, 255, 255), 10, 10, 0, "Score: %d", score);
         break;
     }
 
     // Chão em movimento
-    al_draw_bitmap(floor_image, 0, 473, 0);   // 600 - 127 = 473 (encaixa certinho na base da janela)
+    al_draw_bitmap(floor_image, 0, 473, 0);   // 600 - 127 = 473 (encaixa certo na base da janela)
     al_draw_bitmap(floor_image, 480, 473, 0); // segunda metade
 
     al_flip_display();
@@ -160,11 +160,29 @@ void Scenario::reset() {
 
 // Adiciona um novo par de canos na tela
 void Scenario::addPipe() {
-    int alturaAleatoria = 150 + (std::rand() % 200); // entre 150 e 350
+    int screenHeight = 600;
+    int floorHeight = 127;
+    int gapSize = static_cast<int>(spaceBetweenPipes); // 220
 
-    // Carrega as imagens dos canos (apenas uma vez)
-    auto pipeTop = std::make_shared<Pipe>(1000, alturaAleatoria - spaceBetweenPipes, true, topPipeImage);
-    auto pipeBottom = std::make_shared<Pipe>(1000, alturaAleatoria, false, bottomPipeImage);
+    // Calcula altura máxima possível para o topo do buraco
+    int maxGapY = screenHeight - floorHeight - gapSize; 
+
+    // Valor aleatório para o topo do buraco
+    int gapY = 10 + (std::rand() % (maxGapY - 10 + 1));
+
+    auto pipeTop = std::make_shared<Pipe>(
+        1000,                        // posição X (fora da tela)
+        gapY - al_get_bitmap_height(topPipeImage), // y começa acima do "buraco"
+        true,
+        topPipeImage
+    );
+
+    auto pipeBottom = std::make_shared<Pipe>(
+        1000,                        // mesma posição X
+        gapY + gapSize,             // começa após o "buraco"
+        false,
+        bottomPipeImage
+    );
 
     // Configura a velocidade
     pipeTop->setSpeed(-pipeSpeed);
