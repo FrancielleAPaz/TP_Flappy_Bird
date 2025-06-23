@@ -1,76 +1,45 @@
-CXX = g++
-CXXFLAGS = -Wall -Wextra -std=c++17 -Iinclude -I"C:/allegro-5.0.10-mingw-4.7.0/include"
-LDFLAGS = -L"C:/allegro-5.0.10-mingw-4.7.0/lib" \
-          -lallegro-5.0.10-mt \
-          -lallegro_image-5.0.10-mt \
-          -lallegro_font-5.0.10-mt \
-          -lallegro_ttf-5.0.10-mt \
-          -lallegro_primitives-5.0.10-mt \
-          -lallegro_audio-5.0.10-mt \
-          -lallegro_acodec-5.0.10-mt \
-          -lallegro_dialog-5.0.10-mt
-
 # Diretórios
 SRC_DIR = src
+INC_DIR = include
 OBJ_DIR = obj
 BIN_DIR = bin
-TEST_DIR = tests
 
-# Arquivos principais do jogo
-SRCS := $(wildcard $(SRC_DIR)/*.cpp) main.cpp
-OBJS := $(SRCS:.cpp=.o)
-OBJS := $(patsubst %.o, $(OBJ_DIR)/%.o, $(notdir $(OBJS)))
+# Arquivo final
 TARGET = $(BIN_DIR)/flappybird
 
+# Compilador e flags
+CXX = g++
+CXXFLAGS = -Wall -std=c++17 -I$(INC_DIR)
+
+# Bibliotecas Allegro
+LDLIBS = -lallegro -lallegro_image -lallegro_font -lallegro_ttf -lallegro_primitives -lallegro_audio -lallegro_acodec -lallegro_dialog
+
+# Todos os arquivos fonte
+SOURCES = $(wildcard $(SRC_DIR)/*.cpp)
+
+# Arquivos objeto correspondentes
+OBJECTS = $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SOURCES))
+
 # Regra padrão
-all: $(TARGET)
+all: $(BIN_DIR) $(OBJ_DIR) $(TARGET)
 
-# Linkagem final do jogo
-$(TARGET): $(OBJS)
-	@if not exist "$(BIN_DIR)" mkdir "$(BIN_DIR)"
-	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
+# Compilar executável
+$(TARGET): $(OBJECTS)
+	$(CXX) $(CXXFLAGS) -o $@ $^ $(LDLIBS)
 
-# Compilação dos arquivos .cpp para .o
+# Compilar objetos
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@if not exist "$(OBJ_DIR)" mkdir "$(OBJ_DIR)"
 	$(CXX) $(CXXFLAGS) -c $< -o $@
 
-# Testes
-TEST_SRCS := $(wildcard $(TEST_DIR)/*.cpp)
-TEST_TARGET = $(BIN_DIR)/testes
+# Criar pastas se não existirem
+$(BIN_DIR):
+	mkdir -p $(BIN_DIR)
 
-test: $(TEST_TARGET)
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
 
-$(TEST_TARGET): $(TEST_SRCS)
-	@if not exist "$(BIN_DIR)" mkdir "$(BIN_DIR)"
-	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
-
-run_test: test
-	$(BIN_DIR)/testes
-
-clean_test:
-	del /F /Q $(TEST_TARGET) 2>NUL
-
-# Limpeza geral
+# Limpeza
 clean:
-	del /F /Q $(OBJ_DIR)\*.o $(BIN_DIR)\flappybird $(TEST_TARGET) 2>NUL
+	rm -rf $(OBJ_DIR)/*.o $(TARGET)
 
-# Executar o jogo
-run: all
-	$(BIN_DIR)/flappybird
-
-# Compilar apenas o main.cpp da pasta src
-compile_main:
-	@if not exist "$(OBJ_DIR)" mkdir "$(OBJ_DIR)"
-	$(CXX) $(CXXFLAGS) -c src/main.cpp -o $(OBJ_DIR)/main.o
-
-# Criar executável apenas do main
-main: $(OBJ_DIR)/main.o
-	@if not exist "$(BIN_DIR)" mkdir "$(BIN_DIR)"
-	$(CXX) $(CXXFLAGS) $< -o $(BIN_DIR)/main $(LDFLAGS)
-
-# Executar apenas o main
-run_main: main
-	$(BIN_DIR)/main
-
-.PHONY: all clean run test run_test clean_test compile_main main run_main
+.PHONY: all clean

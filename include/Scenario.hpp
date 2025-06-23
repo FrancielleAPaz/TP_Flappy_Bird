@@ -5,15 +5,13 @@
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_font.h>
 
+//#include "Game.hpp"
 #include "Bird.hpp"
 #include "Pipe.hpp"
-#include "PlayerManager.hpp"
+//#include "PlayerManager.hpp"
 
-enum class GameState {
-    INICIO,
-    JOGANDO,
-    PERDEU
-};
+class Game; 
+enum class GameState;
 
 
 class Scenario {
@@ -37,6 +35,9 @@ private:
     ALLEGRO_BITMAP* floor_image;
     ALLEGRO_FONT* font;
     ALLEGRO_BITMAP* button_play;
+    ALLEGRO_BITMAP* topPipeImage;
+    ALLEGRO_BITMAP* bottomPipeImage;
+
     // Coordenadas e tamanhos do button_play
     float playBtnX = 440;
     float playBtnY = 200;

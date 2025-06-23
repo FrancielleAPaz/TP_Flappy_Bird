@@ -1,3 +1,5 @@
+#pragma once
+
 class GameObject {
 protected:
     float x;  // Posição X no cenário
@@ -9,7 +11,7 @@ public:
 
     // Métodos virtuais puros (interface polimórfica)
     virtual void update() = 0;  // Atualiza o estado do objeto
-    virtual void draw(ALLEGRO_DISPLAY* display) const = 0;  // Renderiza o objeto
+    virtual void draw() const = 0;
     virtual bool checkCollision(const GameObject& other) const = 0;  // Verifica colisão
     
     // Métodos concretos para acesso às propriedades

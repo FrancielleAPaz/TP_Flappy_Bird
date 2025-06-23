@@ -18,12 +18,15 @@ void Pipe::draw() const {
 }
 
 // Verifica colisão com o pássaro
-bool Pipe::checkCollision(const Bird& bird) const {
+bool Pipe::checkCollision(const GameObject& other) const {
+    // Tenta converter o outro objeto para um Bird
+    const Bird* bird = dynamic_cast<const Bird*>(&other);
+    if (!bird) return false;  // Se não for um pássaro, sem colisão
     // Calcula os limites do pássaro
-    float birdLeft = bird.getX();
-    float birdRight = bird.getX() + bird.getWidth();
-    float birdTop = bird.getY();
-    float birdBottom = bird.getY() + bird.getHeight();
+    float birdLeft = bird->getX();
+    float birdRight = bird->getX() + bird->getWidth();
+    float birdTop = bird->getY();
+    float birdBottom = bird->getY() + bird->getHeight();
     
     // Calcula os limites do cano
     float pipeLeft = x;

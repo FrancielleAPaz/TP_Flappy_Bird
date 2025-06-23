@@ -1,3 +1,5 @@
+#pragma once
+
 #include "GameObject.hpp"
 #include "Bird.hpp"
 #include <allegro5/allegro.h>
@@ -6,8 +8,8 @@
 class Pipe : public GameObject {
 private:
     bool top;                   // Indica se é o cano superior
+    ALLEGRO_BITMAP* image;      // Imagem do cano (específica para topo ou base)    
     float speed;                // Velocidade horizontal
-    ALLEGRO_BITMAP* image;      // Imagem do cano (específica para topo ou base)
     static const float WIDTH;   // Largura padrão do cano
 
 public:
@@ -18,8 +20,7 @@ public:
     void draw() const override;
     
     // Verifica colisão APENAS com Bird
-    bool checkCollision(const Bird& bird) const;
-    
+    bool checkCollision(const GameObject& other) const override;    
     // Métodos específicos
     bool isOffScreen() const;
     bool isTop() const;

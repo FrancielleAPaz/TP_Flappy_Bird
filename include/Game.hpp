@@ -9,7 +9,8 @@
 #include <allegro5/allegro_acodec.h>
 
 #include "Scenario.hpp"
-#include "PlayerManager.hpp"
+//#include "PlayerManager.hpp"
+#include <string>
 
 enum class GameState {
     INICIO,
@@ -30,7 +31,7 @@ private:
 
     GameState currentState;
     Scenario scenario;
-    PlayerManager playerManager;
+    //PlayerManager playerManager;
     std::string jogadorAtual;
 
 public:

@@ -52,6 +52,11 @@ void Bird::draw() const {
     );
 }
 
+void Bird::kill() {
+    isAlive = false;
+}
+
+
 bool Bird::checkCollision(const GameObject& other) const {
     // Delega a detecção para o outro objeto
     return other.checkCollision(*this);

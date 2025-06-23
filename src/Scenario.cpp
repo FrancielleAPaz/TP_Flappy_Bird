@@ -11,8 +11,40 @@
 
 // Construtor
 Scenario::Scenario() {
-    bird = std::make_shared<Bird>(500, 300); // posição inicial
-    font = al_load_font("assets/flappyfont.ttf", 36, 0);
+    std::cout << "[INFO] Inicializando cenário..." << std::endl;
+
+    ALLEGRO_BITMAP* birdImage = al_load_bitmap("../assets/birds.png");
+    if (!birdImage) {
+        std::cerr << "[ERRO] falha ao carregar birds.png\n";
+        exit(1); // Aborta o programa imediatamente
+    }
+    bird = std::make_shared<Bird>(500, 300, birdImage);
+
+    font = al_load_font("../assets/flappyfont.ttf", 36, 0);
+    if (!font) std::cerr << "[ERRO] falha ao carregar flappyfont.ttf\n";
+
+    background = al_load_bitmap("../assets/background.bmp");
+    if (!background) std::cerr << "[ERRO] falha ao carregar background.bmp\n";
+
+    logo = al_load_bitmap("../assets/logo.bmp");
+    if (!logo) std::cerr << "[ERRO] falha ao carregar logo.bmp\n";
+
+    button_play = al_load_bitmap("../assets/button_play.png");
+    if (!button_play) std::cerr << "[ERRO] falha ao carregar button_play.png\n";
+
+    gameover_image = al_load_bitmap("../assets/gameover.png");
+    if (!gameover_image) std::cerr << "[ERRO] falha ao carregar gameover.png\n";
+
+    floor_image = al_load_bitmap("../assets/ground.png");
+    if (!floor_image) std::cerr << "[ERRO] falha ao carregar ground.png\n";
+
+    topPipeImage = al_load_bitmap("../assets/tunnel_up.png");
+    if (!topPipeImage) std::cerr << "[ERRO] falha ao carregar tunnel_up.png\n";
+
+    bottomPipeImage = al_load_bitmap("../assets/tunnel_down.png");
+    if (!bottomPipeImage) std::cerr << "[ERRO] falha ao carregar tunnel_down.png\n";
+
+    std::cout << "[INFO] Cenário carregado com sucesso (se nenhum erro acima apareceu).\n";
 
     score = 0;
     gravity = 0.5f;
@@ -20,17 +52,10 @@ Scenario::Scenario() {
     spaceBetweenPipes = 220.f;
     pipeSpawnCounter = 0;
     addScoreFlag = false;
-
-    // Carregar imagens uma vez
-    background = al_load_bitmap("assets/background.bmp");
-    logo = al_load_bitmap("assets/logo.bmp");
-    button_play = al_load_bitmap("assets/button_play.png");
-    gameover_image = al_load_bitmap("assets/gameover.png");
-    floor_image = al_load_bitmap("assets/ground.png");
-
     cx1 = 0;
     cx2 = 1000;
 }
+
 
 // Destrutor
 Scenario::~Scenario() {
@@ -40,6 +65,9 @@ Scenario::~Scenario() {
     if (button_play) al_destroy_bitmap(button_play);
     if (gameover_image) al_destroy_bitmap(gameover_image);
     if (floor_image) al_destroy_bitmap(floor_image);
+    if (topPipeImage) al_destroy_bitmap(topPipeImage);
+    if (bottomPipeImage) al_destroy_bitmap(bottomPipeImage);
+
 }
 
 // Retorna o ponteiro para o pássaro
@@ -52,9 +80,13 @@ void Scenario::update() {
     bird->applyGravity(gravity);
     bird->update();
 
+    if (bird->isDead()) {
+    return; // não atualiza mais cenário se o pássaro morreu
+    }
+
     // Move canos e verifica passagem para score
     for (size_t i = 0; i < pipes.size(); ++i) {
-        pipes[i]->move(-pipeSpeed);
+        pipes[i]->update();
 
         // Adiciona ponto se pássaro passou pelo cano
         if (!addScoreFlag &&
@@ -135,11 +167,8 @@ void Scenario::addPipe() {
     int alturaAleatoria = 150 + (std::rand() % 200); // entre 150 e 350
 
     // Carrega as imagens dos canos (apenas uma vez)
-    static ALLEGRO_BITMAP* topPipeImage = al_load_bitmap("assets/pipe_top.png");
-    static ALLEGRO_BITMAP* bottomPipeImage = al_load_bitmap("assets/pipe_bottom.png");
-
-    auto pipeTop = std::make_shared<Pipe>(1000, alturaAleatoria - spaceBetweenPipes, true);
-    auto pipeBottom = std::make_shared<Pipe>(1000, alturaAleatoria, false);
+    auto pipeTop = std::make_shared<Pipe>(1000, alturaAleatoria - spaceBetweenPipes, true, topPipeImage);
+    auto pipeBottom = std::make_shared<Pipe>(1000, alturaAleatoria, false, bottomPipeImage);
 
     // Configura a velocidade
     pipeTop->setSpeed(-pipeSpeed);
@@ -153,11 +182,13 @@ void Scenario::addPipe() {
 bool Scenario::checkCollision() {
     for (const auto& pipe : pipes) {
         if (bird->checkCollision(*pipe)) {
+            bird->kill();  // marca o pássaro como morto
             return true;
         }
     }
 
     if (bird->getY() < 0 || bird->getY() + bird->getHeight() > 600) {
+        bird->kill();  // morreu ao tocar no chão ou teto
         return true;
     }
 
@@ -175,22 +206,6 @@ int Scenario::getScore() const {
     return score;
 }
 
-// Verifica se os recursos foram carregados com sucesso
-bool Scenario::carregarRecursos() {
-    font = al_load_font("assets/flappyfont.ttf", 36, 0);
-    background = al_load_bitmap("assets/background.bmp");
-    logo = al_load_bitmap("assets/logo.bmp");
-    button_play = al_load_bitmap("assets/button_play.png");
-    gameover_image = al_load_bitmap("assets/gameover.png");
-    floor_image = al_load_bitmap("assets/ground.png");
-
-    if (!font || !background || !logo || !button_play || !gameover_image || !floor_image) {
-        std::cerr << "[ERRO] Falha ao carregar um ou mais recursos gráficos do jogo.\n";
-        return false;
-    }
-
-    return true;
-}
 
 // Verifica o clique do mouse na tela
 bool Scenario::isPlayButtonClicked(int mouseX, int mouseY) const {

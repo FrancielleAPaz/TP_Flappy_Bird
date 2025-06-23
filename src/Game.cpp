@@ -39,9 +39,9 @@ Game::Game() {
 
     running = true;
 
-    som_pulo = al_load_sample("assets/sound/jump.mp3");
-    som_morte = al_load_sample("assets/sound/dead.ogg");
-    trilha = al_load_audio_stream("assets/sound/trilha.wav", 4, 2048);
+    som_pulo = al_load_sample("..assets/sound/jump.mp3");
+    som_morte = al_load_sample("..assets/sound/dead.ogg");
+    trilha = al_load_audio_stream("..assets/sound/trilha.wav", 4, 2048);
 
     if (!som_pulo || !som_morte || !trilha) {
         std::cerr << "[ERRO] Falha ao carregar algum dos arquivos de áudio.\n";
@@ -67,12 +67,12 @@ Game::~Game() {
 // Loop principal do jogo
 void Game::run(const std::string& apelido) {
     // Armazena apelido do jogador atual
-    jogadorAtual = apelido;
+    //jogadorAtual = apelido;
 
     // Cadastra ou recupera jogador
-    if (!playerManager.buscarPlayer(apelido)) {
-        playerManager.registrarPlayer("Jogador", apelido);
-    }
+    //if (!playerManager.buscarPlayer(apelido)) {
+        //playerManager.registrarPlayer("Jogador", apelido);
+    //}
     
     al_start_timer(timer);
 
@@ -102,9 +102,9 @@ void Game::run(const std::string& apelido) {
     }
 
     // Atualizar pontuação no PlayerManager após perder
-    playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
+    //playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
     // Salvar dados no arquivo
-    playerManager.salvarEmArquivo();
+    //playerManager.salvarEmArquivo();
 }
 
 // Trata entradas do teclado de acordo com o estado atual

@@ -1,3 +1,5 @@
+#pragma once
+
 #include "GameObject.hpp"
 #include <allegro5/allegro.h>
 #include <allegro5/allegro_image.h>
@@ -21,6 +23,7 @@ public:
     void update() override;
     void draw() const override;
     bool checkCollision(const GameObject& other) const override;
+    void kill();
     
     // Controle do pássaro
     void jump();
