@@ -19,7 +19,7 @@ Scenario::Scenario() {
     pipeSpeed = 4.0f;
     spaceBetweenPipes = 180.f;
     pipeSpawnCounter = 0;
-    addScoreFlag = false;
+    //addScoreFlag = false;
     lastGapY = 250;
 
     // O carregamento real vem depois...
@@ -66,24 +66,40 @@ std::shared_ptr<Bird> Scenario::getBird() const {
     return bird;
 }
 
-// Atualiza todos os objetos e lógica da partida
-void Scenario::update() {
+ALLEGRO_FONT* Scenario::getFont() const {
+    return font;  // Retorna o ponteiro da fonte carregada
+}
+
+ALLEGRO_BITMAP* Scenario::getBackground() const {
+    return background; // Retorna o ponteiro para o bitmap do background
+}
+
+// Atualiza todos os objetos e lógica da partida e retorna se um ponto foi adicionado
+bool Scenario::updateAndCheckScore() {
+    bool scoreIncreasedThisFrame = false; // Flag para indicar se a pontuação aumentou neste frame
+
     bird->applyGravity(gravity);
     bird->update();
 
     if (bird->isDead()) {
-    return; // não atualiza mais cenário se o pássaro morreu
+        return false; // Não atualiza mais cenário se o pássaro morreu, e não há pontuação
     }
 
     // Move canos e verifica passagem para score
-    for (size_t i = 0; i < pipes.size(); ++i) {
+    for (size_t i = 0; i < pipes.size(); i += 2) {
         pipes[i]->update();
+        if (i + 1 < pipes.size()) { // Garante que há um cano inferior
+            pipes[i+1]->update();
+        }
 
-        // Adiciona ponto se pássaro passou pelo cano
-        if (!addScoreFlag &&
-            pipes[i]->getX() + pipes[i]->getWidth() < bird->getX()) {
+        // Adiciona ponto se pássaro passou pelo cano E este cano ainda não foi pontuado
+        if (!pipes[i]->getScored() && bird->getX() > pipes[i]->getX() + pipes[i]->getWidth()) {
             score++;
-            addScoreFlag = true;
+            pipes[i]->setScored(true); // Marca o cano como pontuado
+            if (i + 1 < pipes.size()) {
+                pipes[i+1]->setScored(true); // Marca o cano inferior também para evitar futuras verificações
+            }
+            scoreIncreasedThisFrame = true; // Sinaliza que a pontuação aumentou neste frame
         }
     }
 
@@ -98,8 +114,9 @@ void Scenario::update() {
     if (pipeSpawnCounter >= 120) {
         addPipe();
         pipeSpawnCounter = 0;
-        addScoreFlag = false;
     }
+
+    return scoreIncreasedThisFrame; // Retorna se um ponto foi feito neste frame
 }
 
 // Desenha os elementos do jogo
@@ -109,8 +126,8 @@ void Scenario::draw(GameState state) {
 
     switch (state) {
     case GameState::INICIO:
-        al_draw_scaled_bitmap(logo, 0, 0, 95, 28, 382, 160, 180, 58, 0);
-        al_draw_scaled_bitmap(button_play, 0, 0, 366, 204, 419, 230, 120, 60, 0);
+        al_draw_scaled_bitmap(logo, 0, 0, 95, 28, 340, 160, 270, 87, 0);
+        al_draw_scaled_bitmap(button_play, 0, 0, 366, 204, 380, 250, 200, 100, 0);
         break;
 
     case GameState::JOGANDO:
@@ -138,7 +155,7 @@ void Scenario::reset() {
     pipes.clear();
     score = 0;
     pipeSpawnCounter = 0;
-    addScoreFlag = false;
+    //addScoreFlag = false;
     bird->reset();
 }
 
@@ -207,11 +224,3 @@ void Scenario::setDifficulty(float g, float speed) {
 int Scenario::getScore() const {
     return score;
 }
-
-
-// Verifica o clique do mouse na tela
-bool Scenario::isPlayButtonClicked(int mouseX, int mouseY) const {
-    return mouseX >= playBtnX && mouseX <= playBtnX + playBtnW &&
-           mouseY >= playBtnY && mouseY <= playBtnY + playBtnH;
-}
-

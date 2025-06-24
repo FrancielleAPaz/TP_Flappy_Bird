@@ -11,6 +11,8 @@ private:
     ALLEGRO_BITMAP* image;      // Imagem do cano (específica para topo ou base)    
     float speed;                // Velocidade horizontal
     static const float WIDTH;   // Largura padrão do cano
+    bool scored; // NOVO: Flag para rastrear se este cano já gerou um ponto
+
 
 public:
     Pipe(float x, float y, bool isTop, ALLEGRO_BITMAP* pipeImage);
@@ -31,4 +33,8 @@ public:
     
     // Setter para velocidade
     void setSpeed(float s);
+
+    // NOVO: Getters e Setters para a flag 'scored'
+    bool getScored() const { return scored; }
+    void setScored(bool s) { scored = s; }
 };

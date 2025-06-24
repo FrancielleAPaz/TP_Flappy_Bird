@@ -1,0 +1,7 @@
+Jogador|123|1|0|0
+Jogador|1234|1|2|2
+Jogador|amorim|1|2|2
+Jogador|testando|1|8|8
+Jogador|teste1|1|1|1
+Jogador|testeando|1|3|3
+Jogador|tres|1|1|1

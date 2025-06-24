@@ -26,6 +26,7 @@ private:
     ALLEGRO_SAMPLE* som_pulo;
     ALLEGRO_SAMPLE* som_morte;
     ALLEGRO_AUDIO_STREAM* trilha;
+    ALLEGRO_SAMPLE* som_score;
 
     bool running;
 
@@ -33,12 +34,14 @@ private:
     Scenario scenario;
     PlayerManager playerManager;
     std::string jogadorAtual;
+    std::string nomeDigitado;
+    bool nomeConfirmado = false;
 
 public:
     Game();
     ~Game();
 
-    void run(const std::string& apelido);
+    void run();
     void handleInput(int);
     void showGameOver();
     void startNewRound();

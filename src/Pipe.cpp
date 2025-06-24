@@ -5,7 +5,7 @@ const float Pipe::WIDTH = 80.0f;
 
 // Construtor
 Pipe::Pipe(float x, float y, bool isTop, ALLEGRO_BITMAP* pipeImage) 
-    : GameObject(x, y), top(isTop), image(pipeImage), speed(0) {}
+    : GameObject(x, y), top(isTop), image(pipeImage), speed(0), scored(false) {}
 
 // Atualiza a posição do cano
 void Pipe::update() {

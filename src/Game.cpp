@@ -17,6 +17,11 @@ Game::Game() {
     al_init_primitives_addon();
     al_install_audio();
     al_init_acodec_addon();
+
+    if (!al_reserve_samples(16)) { 
+        std::cerr << "[ERRO] Falha ao reservar samples de áudio.\n";
+    }
+
     al_install_mouse();
 
     // Criar display (al_create_display)
@@ -33,7 +38,7 @@ Game::Game() {
 
 
     // Criar fila de eventos e timer (al_create_event_queue, al_create_timer)
-    timer = al_create_timer(1.0 / 30.0); // 30 FPS recomendado pelo professor
+    timer = al_create_timer(1.0 / 30.0); // 30 FPS recomendado pelo professor Hector
     event_queue = al_create_event_queue();
 
     // Registrar fontes de evento (teclado, display, timer)
@@ -48,26 +53,28 @@ Game::Game() {
 
     running = true;
 
-    // som_pulo = al_load_sample(".assets/sound/jump.mp3");
-    // som_morte = al_load_sample(".assets/sound/dead.ogg");
-    // trilha = al_load_audio_stream(".assets/sound/trilha.wav", 4, 2048);
+    som_pulo = al_load_sample("./assets/sound/jump.ogg");
+    som_morte = al_load_sample("./assets/sound/dead.ogg");
+    trilha = al_load_audio_stream("./assets/sound/trilha.wav", 4, 2048);
+    som_score = al_load_sample("./assets/sound/score.wav");
 
-    // if (!som_pulo) std::cerr << "[ERRO] Não foi possível carregar jump.mp3\n";
-    // if (!som_morte) std::cerr << "[ERRO] Não foi possível carregar dead.ogg\n";
-    // if (!trilha) std::cerr << "[ERRO] Não foi possível carregar trilha.wav\n";
+    if (!som_pulo) std::cerr << "[ERRO] Não foi possível carregar jump.ogg\n";
+    if (!som_morte) std::cerr << "[ERRO] Não foi possível carregar dead.ogg\n";
+    if (!trilha) std::cerr << "[ERRO] Não foi possível carregar trilha.wav\n";
+    if (!som_score) std::cerr << "[ERRO] Não foi possível carregar score.wav\n";
+
 
     // if (!som_pulo || !som_morte || !trilha) {
     //     std::cerr << "[ERRO] Falha ao carregar algum dos arquivos de áudio.\n";
     //     exit(1);
     // }
 
-    // al_attach_audio_stream_to_mixer(trilha, al_get_default_mixer());
-    // al_set_audio_stream_playmode(trilha, ALLEGRO_PLAYMODE_LOOP);
-
-    if (!scenario.carregarRecursos()) {
-        al_show_native_message_box(nullptr, "Erro", "Recursos", "Falha ao carregar recursos gráficos do cenário.", nullptr, ALLEGRO_MESSAGEBOX_ERROR);
-        exit(1);
+    if (trilha) {
+        al_attach_audio_stream_to_mixer(trilha, al_get_default_mixer());
+        al_set_audio_stream_playmode(trilha, ALLEGRO_PLAYMODE_LOOP);
+        al_set_audio_stream_playing(trilha, true); // Começa a tocar a trilha imediatamente
     }
+
 }
 
 // Destrutor: libera memória e destrói objetos Allegro
@@ -76,43 +83,124 @@ Game::~Game() {
     al_destroy_timer(timer);
     al_destroy_event_queue(event_queue);
     al_destroy_display(display);
-    // al_destroy_sample(som_pulo);
-    // al_destroy_sample(som_morte);
-    // al_destroy_audio_stream(trilha);
+    if (som_pulo) al_destroy_sample(som_pulo); 
+    if (som_morte) al_destroy_sample(som_morte); 
+    if (trilha) al_destroy_audio_stream(trilha);
+    if (som_score) al_destroy_sample(som_score); 
 
+    // Shutdown de addons 
+    al_shutdown_image_addon();
+    al_shutdown_primitives_addon();
+    al_shutdown_font_addon();
+    al_shutdown_ttf_addon();
+    al_uninstall_keyboard();
+    al_uninstall_mouse();
 }
 
 // Loop principal do jogo
-void Game::run(const std::string& apelido) {
-    // Armazena apelido do jogador atual
-    jogadorAtual = apelido;
-
-    // Carrega os dados dos jogadores já existentes
-    playerManager.carregarDeArquivo("data/players.txt");
-
-    // Cadastra ou recupera jogador
-    if (!playerManager.buscarPlayer(apelido)) {
-        std::cout << "[INFO] Jogador não encontrado. Será criado um novo.\n";
-        playerManager.registrarPlayer("Jogador", apelido);
-    }
-    
+void Game::run() {
     al_start_timer(timer);
-
     ALLEGRO_EVENT event;
+
+    nomeDigitado = "";
+    nomeConfirmado = false;
+    // Variáveis para o cursor piscante
+    double cursorTimer = 0.0;
+    bool showCursor = true;
+    const double CURSOR_BLINK_RATE = 0.5; // Taxa de piscar do cursor em segundos
+
     while (running) {
         al_wait_for_event(event_queue, &event);
 
+        // FASE DE DIGITAÇÃO DO NOME NA TELA
+        if (!nomeConfirmado) {
+            // Lógica para o cursor piscante
+            if (event.type == ALLEGRO_EVENT_TIMER) {
+                cursorTimer += al_get_timer_speed(timer);
+                if (cursorTimer >= CURSOR_BLINK_RATE) {
+                    showCursor = !showCursor;
+                    cursorTimer = 0.0;
+                }
+            }
+
+            if (event.type == ALLEGRO_EVENT_KEY_CHAR) {
+                int unicode = event.keyboard.unichar;
+
+                if (unicode >= 32 && unicode <= 126 && nomeDigitado.size() < 20) {
+                    nomeDigitado += static_cast<char>(unicode);
+                } else if (unicode == 8 && !nomeDigitado.empty()) {
+                    nomeDigitado.pop_back();  // backspace
+                } else if (unicode == 13) {  // Enter
+                    if (!nomeDigitado.empty()) { // Só confirma se o nome não estiver vazio
+                        nomeConfirmado = true;
+                        jogadorAtual = nomeDigitado;
+
+                        // Carrega e registra jogador
+                        playerManager.carregarDeArquivo("data/players.txt");
+                        if (!playerManager.buscarPlayer(jogadorAtual)) {
+                            std::cout << "[INFO] Jogador não encontrado. Criando novo jogador.\n";
+                            playerManager.registrarPlayer("Jogador", jogadorAtual); // Mantém "Jogador" como valor padrão para o novo jogador
+                        }
+
+                        currentState = GameState::INICIO;
+                    }
+                }
+            } else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+                running = false;
+            }
+
+            // Tela de digitação (renderização)
+            al_clear_to_color(al_map_rgb(0, 0, 0)); // Fundo preto
+
+            // Desenha o background carregado pelo objeto scenario
+            al_draw_bitmap(scenario.getBackground(), 0, 0, 0);
+            al_draw_bitmap(scenario.getBackground(), 480, 0, 0);
+
+            // Título
+            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 150, ALLEGRO_ALIGN_CENTER, "BEM-VINDO AO FLAPPY BIRD!");
+
+            // Instrução para o usuário
+            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 220, ALLEGRO_ALIGN_CENTER, "Por favor, digite seu nome:");
+
+            // Desenha a caixa de entrada
+            al_draw_filled_rectangle(300, 290, 700, 350, al_map_rgb(30, 30, 30)); // Fundo cinza escuro para a caixa
+            al_draw_rectangle(300, 290, 700, 350, al_map_rgb(100, 100, 100), 2); // Borda cinza claro
+
+            // Texto digitado
+            float text_width = al_get_text_width(scenario.getFont(), nomeDigitado.c_str());
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2, 300, ALLEGRO_ALIGN_LEFT, nomeDigitado.c_str());
+
+            // Cursor piscante
+            if (showCursor) {
+                al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2 + text_width, 300, ALLEGRO_ALIGN_LEFT, "_");
+            }
+
+            // Mensagem de instrução para confirmar
+            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 400, ALLEGRO_ALIGN_CENTER, "Pressione ENTER para confirmar.");
+
+            al_flip_display();
+            continue;
+        }
+
+        // LOOP NORMAL DO JOGO 
         switch (event.type) {
         case ALLEGRO_EVENT_TIMER:
             if (currentState == GameState::JOGANDO) {
-                scenario.update();
+                // Chamar o método atualizado que retorna se um ponto foi adicionado
+                bool scoredThisFrame = scenario.updateAndCheckScore();
+                if (scoredThisFrame) { // Se um ponto foi marcado neste frame
+                    if (som_score) {
+                        al_play_sample(som_score, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+                    }
+                }
                 if (scenario.checkCollision()) {
                     showGameOver();
                 }
             }
             scenario.draw(currentState);
+            al_flip_display();
             break;
-        
+            
         case ALLEGRO_EVENT_KEY_DOWN:
             handleInput(event.keyboard.keycode);
             break;
@@ -131,35 +219,19 @@ void Game::run(const std::string& apelido) {
 
 // Trata entradas do teclado de acordo com o estado atual
 void Game::handleInput(int keycode) {
-    // Configurando para tocar o som jump.mp3 ao pressionar space
-    if (keycode == ALLEGRO_KEY_SPACE) {
-    //al_play_sample(som_pulo, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
-    scenario.getBird()->jump();
-    }
-
-    // if estado == INICIO → se pressionar o botão esquerdo do mouse no playbutton o jogo inicia
-    if (currentState == GameState::INICIO) {
-        ALLEGRO_MOUSE_STATE mouse;
-        al_get_mouse_state(&mouse);
-        // Se o cursor do mouse passar sobre o buttonplay, ele muda de forma.
-        if (scenario.isPlayButtonClicked(mouse.x, mouse.y)) {
-            al_set_system_mouse_cursor(display, ALLEGRO_SYSTEM_MOUSE_CURSOR_LINK);
-        } else {
-            al_set_system_mouse_cursor(display, ALLEGRO_SYSTEM_MOUSE_CURSOR_DEFAULT);
+    // Configurando para tocar o som jump.ogg ao pressionar space
+    if (keycode == ALLEGRO_KEY_SPACE) { //
+        if (som_pulo) { // Toca o som de pulo apenas se ele foi carregado com sucesso
+            al_play_sample(som_pulo, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr); //
         }
-
-        if (al_mouse_button_down(&mouse, 1)) {
-            if (scenario.isPlayButtonClicked(mouse.x, mouse.y)) {
-                currentState = GameState::JOGANDO;
-            }
+        if(scenario.getBird()){ //
+            scenario.getBird()->jump(); //
         }
     }
 
-
-
-    // if estado == INICIO → se apertar ENTER, muda para JOGANDO
+    // if estado == INICIO → se apertar SPACE, muda para JOGANDO
     if (currentState == GameState::INICIO) {
-        if (keycode == ALLEGRO_KEY_ENTER) {
+        if (keycode == ALLEGRO_KEY_SPACE) {
             currentState = GameState::JOGANDO;
         }
     // if estado == JOGANDO → se apertar espaço, chama bird->jump()
@@ -178,7 +250,9 @@ void Game::handleInput(int keycode) {
 // Mostra tela de game over, muda estado para PERDEU
 void Game::showGameOver() {
     // Configurando som de morte no momento em que o jogador perder
-   // al_play_sample(som_morte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+    if (som_morte) { // Toca o som de morte apenas se ele foi carregado com sucesso
+        al_play_sample(som_morte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr); //
+    }
     currentState = GameState::PERDEU;
 }
 
