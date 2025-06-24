@@ -98,82 +98,87 @@ Game::~Game() {
 }
 
 void Game::telaInserirJogador() {
-    nomeDigitado = "";
-    nomeConfirmado = false;
-    showCursor = true;
-    cursorTimer = 0;
+    std::string nome = "";
+    std::string apelido = "";
+    bool nomeConfirmado = false;
+    bool apelidoConfirmado = false;
+    bool showCursor = true;
+    double cursorTimer = 0.0;
 
-    while (!nomeConfirmado && running) {
+    while (running && !apelidoConfirmado) {
         ALLEGRO_EVENT event;
         al_wait_for_event(event_queue, &event);
 
+        if (event.type == ALLEGRO_EVENT_TIMER) {
+            cursorTimer += al_get_timer_speed(timer);
+            if (cursorTimer >= CURSOR_BLINK_RATE) {
+                showCursor = !showCursor;
+                cursorTimer = 0.0;
+            }
+        }
+
+        if (event.type == ALLEGRO_EVENT_KEY_CHAR) {
+            int unicode = event.keyboard.unichar;
+
+            // Decide se está digitando o nome ou o apelido
+            std::string& campoAtual = nomeConfirmado ? apelido : nome;
+            bool& confirmadoAtual = nomeConfirmado ? apelidoConfirmado : nomeConfirmado;
+
+            if (unicode >= 32 && unicode <= 126 && campoAtual.size() < 20) {
+                campoAtual += static_cast<char>(unicode);
+            } else if (unicode == 8 && !campoAtual.empty()) {
+                campoAtual.pop_back();  // backspace
+            } else if (unicode == 13) {  // Enter
+                if (!campoAtual.empty()) {
+                    confirmadoAtual = true;
+                }
+            }
+        } else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+            running = false;
+        }
+
+        // Renderização da tela
+        al_clear_to_color(al_map_rgb(0, 0, 0));
+        al_draw_bitmap(scenario.getBackground(), 0, 0, 0);
+        al_draw_bitmap(scenario.getBackground(), 480, 0, 0);
+
+        al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 150, ALLEGRO_ALIGN_CENTER, "BEM-VINDO AO FLAPPY BIRD!");
+
         if (!nomeConfirmado) {
-            // Lógica para o cursor piscante
-            if (event.type == ALLEGRO_EVENT_TIMER) {
-                cursorTimer += al_get_timer_speed(timer);
-                if (cursorTimer >= CURSOR_BLINK_RATE) {
-                    showCursor = !showCursor;
-                    cursorTimer = 0.0;
-                }
+            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 220, ALLEGRO_ALIGN_CENTER, "Por favor, digite seu NOME:");
+        } else {
+            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 220, ALLEGRO_ALIGN_CENTER, "Por favor, digite seu APELIDO:");
+        }
+
+        // Caixa de entrada
+        al_draw_filled_rectangle(300, 290, 700, 350, al_map_rgb(30, 30, 30));
+        al_draw_rectangle(300, 290, 700, 350, al_map_rgb(100, 100, 100), 2);
+
+        std::string textoExibido = nomeConfirmado ? apelido : nome;
+        float text_width = al_get_text_width(scenario.getFont(), textoExibido.c_str());
+
+        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2, 300, ALLEGRO_ALIGN_LEFT, textoExibido.c_str());
+
+        if (showCursor) {
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2 + text_width, 300, ALLEGRO_ALIGN_LEFT, "_");
+        }
+
+        al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 400, ALLEGRO_ALIGN_CENTER, "Pressione ENTER para confirmar.");
+
+        al_flip_display();
+
+        // Quando nome e apelido confirmados, registra o jogador
+        if (nomeConfirmado && apelidoConfirmado) {
+            jogadorAtual = apelido;  // Usa o apelido como identificador do jogador
+
+            playerManager.carregarDeArquivo("data/players.txt");
+            if (!playerManager.buscarPlayer(jogadorAtual)) {
+                std::cout << "[INFO] Jogador não encontrado. Criando novo jogador.\n";
+                playerManager.registrarPlayer(nome, jogadorAtual);
             }
 
-            if (event.type == ALLEGRO_EVENT_KEY_CHAR) {
-                int unicode = event.keyboard.unichar;
-
-                if (unicode >= 32 && unicode <= 126 && nomeDigitado.size() < 20) {
-                    nomeDigitado += static_cast<char>(unicode);
-                } else if (unicode == 8 && !nomeDigitado.empty()) {
-                    nomeDigitado.pop_back();  // backspace
-                } else if (unicode == 13) {  // Enter
-                    if (!nomeDigitado.empty()) { // Só confirma se o nome não estiver vazio
-                        nomeConfirmado = true;
-                        jogadorAtual = nomeDigitado;
-
-                        // Carrega e registra jogador
-                        playerManager.carregarDeArquivo("data/players.txt");
-                        if (!playerManager.buscarPlayer(jogadorAtual)) {
-                            std::cout << "[INFO] Jogador não encontrado. Criando novo jogador.\n";
-                            playerManager.registrarPlayer("Jogador", jogadorAtual); // Mantém "Jogador" como valor padrão para o novo jogador
-                        }
-
-                        currentState = GameState::INICIO;
-                    }
-                }
-            } else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-                running = false;
-            }
-
-            // Tela de digitação (renderização)
-            al_clear_to_color(al_map_rgb(0, 0, 0)); // Fundo preto
-
-            // Desenha o background carregado pelo objeto scenario
-            al_draw_bitmap(scenario.getBackground(), 0, 0, 0);
-            al_draw_bitmap(scenario.getBackground(), 480, 0, 0);
-
-            // Título
-            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 150, ALLEGRO_ALIGN_CENTER, "BEM-VINDO AO FLAPPY BIRD!");
-
-            // Instrução para o usuário
-            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 220, ALLEGRO_ALIGN_CENTER, "Por favor, digite seu nome:");
-
-            // Desenha a caixa de entrada
-            al_draw_filled_rectangle(300, 290, 700, 350, al_map_rgb(30, 30, 30)); // Fundo cinza escuro para a caixa
-            al_draw_rectangle(300, 290, 700, 350, al_map_rgb(100, 100, 100), 2); // Borda cinza claro
-
-            // Texto digitado
-            float text_width = al_get_text_width(scenario.getFont(), nomeDigitado.c_str());
-            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2, 300, ALLEGRO_ALIGN_LEFT, nomeDigitado.c_str());
-
-            // Cursor piscante
-            if (showCursor) {
-                al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2 + text_width, 300, ALLEGRO_ALIGN_LEFT, "_");
-            }
-
-            // Mensagem de instrução para confirmar
-            al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 400, ALLEGRO_ALIGN_CENTER, "Pressione ENTER para confirmar.");
-
-            al_flip_display();
-            continue;
+            currentState = GameState::INICIO;  // volta para o menu ou próximo estado
+            break;  // sai do loop da tela de inserção
         }
     }
 }
@@ -249,6 +254,9 @@ void Game::telaRemoverJogador() {
     }
 }
 
+#include <vector>
+#include <algorithm>
+
 void Game::telaMostrarPlacar() {
     // Carrega jogadores do arquivo
     playerManager.carregarDeArquivo("data/players.txt");
@@ -267,6 +275,17 @@ void Game::telaMostrarPlacar() {
             running = false;  // Fecha o jogo se fechar janela
         }
 
+        // Copiar jogadores para vetor para ordenar
+        std::vector<Player> jogadores;
+        for (const auto& par : playerManager.getPlayersMap()) {
+            jogadores.push_back(par.second);
+        }
+
+        // Ordenar por pontuação máxima decrescente
+        std::sort(jogadores.begin(), jogadores.end(), [](const Player& a, const Player& b) {
+            return a.getPontuacaoMax() > b.getPontuacaoMax();
+        });
+
         // Renderização da tela de placar
         al_clear_to_color(al_map_rgb(0, 0, 0));
         al_draw_bitmap(scenario.getBackground(), 0, 0, 0);
@@ -275,11 +294,10 @@ void Game::telaMostrarPlacar() {
         al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 100, ALLEGRO_ALIGN_CENTER, "PLACAR DE JOGADORES");
         al_draw_text(scenario.getFont(), al_map_rgb(0, 0, 0), 500, 140, ALLEGRO_ALIGN_CENTER, "Pressione ENTER para voltar");
 
-        // Lista jogadores e pontuações
+        // Lista jogadores e pontuações ordenados
         int y = 180;
-        for (const auto& par : playerManager.getPlayersMap()) { 
-            // getPlayersMap() deve retornar const std::map<string, Player>&
-            std::string linha = par.second.getNome() + " (" + par.second.getApelido() + ") - Máx: " + std::to_string(par.second.getPontuacaoMax()) + ", Total: " + std::to_string(par.second.getPontuacaoTotal());
+        for (const auto& jogador : jogadores) {
+            std::string linha = jogador.getNome() + " (" + jogador.getApelido() + ") - Máx: " + std::to_string(jogador.getPontuacaoMax()) + ", Total: " + std::to_string(jogador.getPontuacaoTotal());
             al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 100, y, ALLEGRO_ALIGN_LEFT, linha.c_str());
             y += 40;
 
@@ -291,6 +309,7 @@ void Game::telaMostrarPlacar() {
 }
 
 
+
 // Loop principal do jogo
 void Game::run() {
     al_start_timer(timer);
@@ -298,136 +317,146 @@ void Game::run() {
 
     nomeDigitado = "";
     nomeConfirmado = false;
-    // Variáveis para o cursor piscante
+
     double cursorTimer = 0.0;
     bool showCursor = true;
-    //const double CURSOR_BLINK_RATE = 0.5; // Taxa de piscar do cursor em segundos
+
+    bool gameOverAtivo = false;  // flag para indicar que estamos na tela de game over aguardando input
 
     while (running) {
         al_wait_for_event(event_queue, &event);
 
-    //MENU
-    if (!opcaoConfirmada) {
-    // Cursor piscante
-    if (event.type == ALLEGRO_EVENT_TIMER) {
-        cursorTimer += al_get_timer_speed(timer);
-        if (cursorTimer >= CURSOR_BLINK_RATE) {
-            showCursor = !showCursor;
-            cursorTimer = 0.0;
-        }
-    }
-
-    if (event.type == ALLEGRO_EVENT_KEY_CHAR) {
-        int unicode = event.keyboard.unichar;
-
-        if (unicode >= '1' && unicode <= '5' && opcaoDigitada.empty()) {
-            opcaoDigitada = static_cast<char>(unicode);
-        } else if (unicode == 8 && !opcaoDigitada.empty()) {
-            opcaoDigitada.pop_back();  // backspace
-        } else if (unicode == 13 && !opcaoDigitada.empty()) {  // Enter
-            opcaoEscolhida = opcaoDigitada[0];
-            opcaoConfirmada = true;
-
-            switch (opcaoEscolhida) {
-                case '1':
-                    std::cout << "[INFO] Opção 1: Escolher jogador.\n";
-                    telaInserirJogador();
-                    break;
-
-                case '2':
-                    std::cout << "[INFO] Opção 2: Jogar sem login.\n";
-                    currentState = GameState::INICIO;
-                    break;
-
-                case '3':
-                    std::cout << "[INFO] Opção 3: Remover jogador.\n";
-                    telaRemoverJogador();
-                    // Volta para o menu
-                    opcaoDigitada.clear();
-                    opcaoConfirmada = false;
-                    break;
-
-                case '4':
-                    std::cout << "[INFO] Opção 4: Mostrar pontuação.\n";
-                    telaMostrarPlacar();
-                    // Volta para o menu
-                    opcaoDigitada.clear();
-                    opcaoConfirmada = false;
-                    break;
-
-                case '5':
-                    std::cout << "[INFO] Opção 5: Sair.\n";
-                    running = false;
-                    break;
-
+        // MENU: roda enquanto o jogador não confirmou a opção
+        if (!opcaoConfirmada && !gameOverAtivo) {
+            if (event.type == ALLEGRO_EVENT_TIMER) {
+                cursorTimer += al_get_timer_speed(timer);
+                if (cursorTimer >= CURSOR_BLINK_RATE) {
+                    showCursor = !showCursor;
+                    cursorTimer = 0.0;
                 }
             }
 
-        } else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
-            running = false;
-        }
+            if (event.type == ALLEGRO_EVENT_KEY_CHAR) {
+                int unicode = event.keyboard.unichar;
 
-        // Renderização do menu
-        al_clear_to_color(al_map_rgb(0, 0, 0));
-        al_draw_bitmap(scenario.getBackground(), 0, 0, 0);
-        al_draw_bitmap(scenario.getBackground(), 480, 0, 0);
+                if (unicode >= '1' && unicode <= '5' && opcaoDigitada.empty()) {
+                    opcaoDigitada = static_cast<char>(unicode);
+                } else if (unicode == 8 && !opcaoDigitada.empty()) {
+                    opcaoDigitada.pop_back();  // backspace
+                } else if (unicode == 13 && !opcaoDigitada.empty()) {  // Enter
+                    opcaoEscolhida = opcaoDigitada[0];
+                    opcaoConfirmada = true;
 
-        // Título do menu
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 100, ALLEGRO_ALIGN_CENTER, "MENU PRINCIPAL");
+                    switch (opcaoEscolhida) {
+                        case '1':
+                            std::cout << "[INFO] Opção 1: Escolher jogador.\n";
+                            telaInserirJogador();
+                            break;
 
-        // Opções
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 150, ALLEGRO_ALIGN_CENTER, "1 - Escolher Jogador");
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 190, ALLEGRO_ALIGN_CENTER, "2 - Jogar sem login");
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 230, ALLEGRO_ALIGN_CENTER, "3 - Remover jogador");
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 270, ALLEGRO_ALIGN_CENTER, "4 - Mostrar pontuação");
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 310, ALLEGRO_ALIGN_CENTER, "5 - Sair");
+                        case '2':
+                            std::cout << "[INFO] Opção 2: Jogar sem login.\n";
+                            currentState = GameState::JOGANDO; // Começa o jogo
+                            break;
 
-        // Caixa de entrada
-        al_draw_filled_rectangle(400, 340, 600, 390, al_map_rgb(30, 30, 30));
-        al_draw_rectangle(400, 340, 600, 390, al_map_rgb(100, 100, 100), 2);
+                        case '3':
+                            std::cout << "[INFO] Opção 3: Remover jogador.\n";
+                            telaRemoverJogador();
+                            opcaoDigitada.clear();
+                            opcaoConfirmada = false;
+                            break;
 
-        // Texto digitado
-        float text_width = al_get_text_width(scenario.getFont(), opcaoDigitada.c_str());
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2, 350, ALLEGRO_ALIGN_LEFT, opcaoDigitada.c_str());
+                        case '4':
+                            std::cout << "[INFO] Opção 4: Mostrar pontuação.\n";
+                            telaMostrarPlacar();
+                            opcaoDigitada.clear();
+                            opcaoConfirmada = false;
+                            break;
 
-        // Cursor
-        if (showCursor) {
-            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2 + text_width, 350, ALLEGRO_ALIGN_LEFT, "_");
-        }
-
-        // Instrução
-        al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 410, ALLEGRO_ALIGN_CENTER, "Digite uma opção de 1 a 5 e pressione ENTER.");
-
-        // Mensagem opcional (ex: "Jogador criado")
-        if (!mensagemMenu.empty()) {
-            al_draw_text(scenario.getFont(), al_map_rgb(0, 255, 0), 500, 460, ALLEGRO_ALIGN_CENTER, mensagemMenu.c_str());
-        }
-
-        al_flip_display();
-        continue;
-    }
-
-        // LOOP NORMAL DO JOGO 
-        switch (event.type) {
-        case ALLEGRO_EVENT_TIMER:
-            if (currentState == GameState::JOGANDO) {
-                // Chamar o método atualizado que retorna se um ponto foi adicionado
-                bool scoredThisFrame = scenario.updateAndCheckScore();
-                if (scoredThisFrame) { // Se um ponto foi marcado neste frame
-                    if (som_score) {
-                        al_play_sample(som_score, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+                        case '5':
+                            std::cout << "[INFO] Opção 5: Sair.\n";
+                            running = false;
+                            break;
                     }
                 }
+            } else if (event.type == ALLEGRO_EVENT_DISPLAY_CLOSE) {
+                running = false;
+            }
+
+            // Renderização do menu
+            al_clear_to_color(al_map_rgb(0, 0, 0));
+            al_draw_bitmap(scenario.getBackground(), 0, 0, 0);
+            al_draw_bitmap(scenario.getBackground(), 480, 0, 0);
+
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 100, ALLEGRO_ALIGN_CENTER, "MENU PRINCIPAL");
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 150, ALLEGRO_ALIGN_CENTER, "1 - Escolher Jogador");
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 190, ALLEGRO_ALIGN_CENTER, "2 - Jogar sem login");
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 230, ALLEGRO_ALIGN_CENTER, "3 - Remover jogador");
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 270, ALLEGRO_ALIGN_CENTER, "4 - Mostrar pontuação");
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 310, ALLEGRO_ALIGN_CENTER, "5 - Sair");
+
+            al_draw_filled_rectangle(400, 340, 600, 390, al_map_rgb(30, 30, 30));
+            al_draw_rectangle(400, 340, 600, 390, al_map_rgb(100, 100, 100), 2);
+
+            float text_width = al_get_text_width(scenario.getFont(), opcaoDigitada.c_str());
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2, 350, ALLEGRO_ALIGN_LEFT, opcaoDigitada.c_str());
+
+            if (showCursor) {
+                al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 0), 500 - text_width / 2 + text_width, 350, ALLEGRO_ALIGN_LEFT, "_");
+            }
+
+            al_draw_text(scenario.getFont(), al_map_rgb(255, 255, 255), 500, 410, ALLEGRO_ALIGN_CENTER, "Digite uma opção de 1 a 5 e pressione ENTER.");
+
+            if (!mensagemMenu.empty()) {
+                al_draw_text(scenario.getFont(), al_map_rgb(0, 255, 0), 500, 460, ALLEGRO_ALIGN_CENTER, mensagemMenu.c_str());
+            }
+
+            al_flip_display();
+            continue;
+        }
+
+        // LOOP DE JOGO E GAME OVER
+        switch (event.type) {
+        case ALLEGRO_EVENT_TIMER:
+            if (currentState == GameState::JOGANDO && !gameOverAtivo) {
+                bool scoredThisFrame = scenario.updateAndCheckScore();
+                if (scoredThisFrame && som_score) {
+                    al_play_sample(som_score, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+                }
+
                 if (scenario.checkCollision()) {
                     showGameOver();
+
+                    // Atualiza e salva pontuação após morrer
+                    playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
+                    playerManager.salvarEmArquivo("data/players.txt");
+
+                    // Ativa tela de game over e pausa jogo
+                    gameOverAtivo = true;
                 }
             }
+
             scenario.draw(currentState);
             al_flip_display();
             break;
-            
+
         case ALLEGRO_EVENT_KEY_DOWN:
-            handleInput(event.keyboard.keycode);
+            if (gameOverAtivo) {
+                // Se jogador apertar Espaço ou Enter, reinicia jogo
+                if (event.keyboard.keycode == ALLEGRO_KEY_SPACE || event.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+                    // Resetar jogo e iniciar novamente
+                    scenario.reset();
+                    currentState = GameState::JOGANDO;
+                    gameOverAtivo = false;
+                } else {
+                    // Qualquer outra tecla volta ao menu
+                    gameOverAtivo = false;
+                    currentState = GameState::INICIO;
+                    opcaoConfirmada = false;
+                    opcaoDigitada.clear();
+                }
+            } else {
+                handleInput(event.keyboard.keycode);
+            }
             break;
 
         case ALLEGRO_EVENT_DISPLAY_CLOSE:
@@ -435,11 +464,6 @@ void Game::run() {
             break;
         }
     }
-
-    // Atualizar pontuação no PlayerManager após perder
-    playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
-    // Salvar dados no arquivo
-    playerManager.salvarEmArquivo("data/players.txt");
 }
 
 // Trata entradas do teclado de acordo com o estado atual
