@@ -3,13 +3,13 @@
 
 Projeto final da discipliana de Programação e Desenvolvimento de Software II - DCC/UFMG, 2025/1
 
-O TP_Flappy_Bird é um projeto realizado por 5 alunos dos cursos do Departamento de Ciência da Computação da UFMG. Esse trabalho teve o intuito de implementar em C++ o clássico jogo Flappy Bird utilizando a biblioteca Allegro para a renderização, entrada de dados e elementos gráficos. O projeto possui uma estrutura em módulos, onde foram contidas classes para o gerenciamento d4e cenário, pássaro, canos, jogadores e um sistema básico de pontuação.
+O TP_Flappy_Bird é um projeto realizado por 4 alunos dos cursos do Departamento de Ciência da Computação da UFMG. Esse trabalho teve o intuito de implementar em C++ o clássico jogo Flappy Bird utilizando a biblioteca Allegro para a renderização, entrada de dados e elementos gráficos. O projeto possui uma estrutura em módulos, onde foram contidas classes para o gerenciamento de cenário, pássaro, canos, jogadores e um sistema básico de pontuação.
 O código contém testes unitários implementados com a biblioteca doctest para garantir a corretude das funcionalidades principais do jogo.
  
 ## Funcionalidades
 Toda a física do Flappy Bird original(gravidade, pulo, colisão);
-Cenário com obstáculos gerados aleatoriamente;
-Gerenciamento de pontuação, jogadores e armazenamento;
+Cenário com obstáculos gerados (canos);
+Gerenciamento de pontuação, jogadores e armazenamento; Sons também forma integrados para ca uma das açõoes principais (pular, pontuar e morrer); Um menu funcional e interativo para o jogador digitar seu nickname;
 Sistema de testes para as principais classes do jogo para garantir o funcionamento eficaz do jogo;
 Recursos gráficos carregados via Allegro 5;
 Interface gráfica com recursos visuais básicos.
