@@ -102,6 +102,10 @@ No Windows, recomenda -se usar MSYS2 com pacotes Allegro instalados.
 No Linux, instale as dependências (Debian/Ubuntu): sudo apt-get install liballegro5-dev liballegro-image5 liballegro-font5 liballegro-ttf5 liballegro-primitives5 liballegro-audio5 liballegro-acodec5 liballegro-dialog5.
 No macOS, use brew: brew install allegro.
 
+## Dificuldades 
+Configuração da biblioteca Allegro e problemas de linkagem/ compilação;
+Configuração do Makefiçe para compilar corretamente todos os módulos e os testes;
+
 
 ## Contato
 Para quaisquer dúvidas ou contribuições envie um pull request.
