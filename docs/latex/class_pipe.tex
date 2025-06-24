@@ -1,0 +1,130 @@
+\doxysection{Pipe Class Reference}
+\hypertarget{class_pipe}{}\label{class_pipe}\index{Pipe@{Pipe}}
+
+
+{\ttfamily \#include $<$Pipe.\+hpp$>$}
+
+Inheritance diagram for Pipe\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pipe}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_pipe_a733ceb68d275a1902aaf4a4a73327bac}{Pipe}} (float \mbox{\hyperlink{class_game_object_ad4976cd29785cf9bd791148ff397c41e}{x}}, float \mbox{\hyperlink{class_game_object_a9ac54f1c686ecf5656139a829ed62041}{y}}, bool \mbox{\hyperlink{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b}{is\+Top}}, ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}pipe\+Image)
+\item 
+void \mbox{\hyperlink{class_pipe_a5c21f37e6bf9ff0ee1c16fee62eb1039}{update}} () override
+\item 
+void \mbox{\hyperlink{class_pipe_adae5e64c88b105dc91670aeaad9bfe99}{draw}} () const override
+\item 
+bool \mbox{\hyperlink{class_pipe_adde5c27e7dd8097b3d53fd753d5c0df7}{check\+Collision}} (const \mbox{\hyperlink{class_game_object}{Game\+Object}} \&other) const override
+\item 
+bool \mbox{\hyperlink{class_pipe_aba62c5944ba5d7d1c3dc961968e0963d}{is\+Off\+Screen}} () const
+\item 
+bool \mbox{\hyperlink{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b}{is\+Top}} () const
+\item 
+float \mbox{\hyperlink{class_pipe_a77ce646f3be408ec13c0517d64570881}{get\+Width}} () const
+\item 
+float \mbox{\hyperlink{class_pipe_a3caa27b4a5b2b0c0518fe5303f87d4c3}{get\+Height}} () const
+\item 
+void \mbox{\hyperlink{class_pipe_aa66127299f6c88adaf82d4a31a79e3cc}{set\+Speed}} (float s)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game_object_ae7a80374287aa8ae7253a990235e9bc7}{Game\+Object}} (float startX, float startY)
+\item 
+virtual \mbox{\hyperlink{class_game_object_a67ae2fa6e7916c799700cd659975d8ea}{\texorpdfstring{$\sim$}{\string~}\+Game\+Object}} ()=default
+\item 
+float \mbox{\hyperlink{class_game_object_abe61df236efb58849b29d242d87fc59f}{getX}} () const
+\item 
+float \mbox{\hyperlink{class_game_object_a3f55728263b9ce2407459d14b9861b04}{getY}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_game_object}{Game\+Object}}}
+\begin{DoxyCompactItemize}
+\item 
+float \mbox{\hyperlink{class_game_object_ad4976cd29785cf9bd791148ff397c41e}{x}}
+\item 
+float \mbox{\hyperlink{class_game_object_a9ac54f1c686ecf5656139a829ed62041}{y}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_pipe_a733ceb68d275a1902aaf4a4a73327bac}\label{class_pipe_a733ceb68d275a1902aaf4a4a73327bac} 
+\index{Pipe@{Pipe}!Pipe@{Pipe}}
+\index{Pipe@{Pipe}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{Pipe()}{Pipe()}}
+{\footnotesize\ttfamily Pipe\+::\+Pipe (\begin{DoxyParamCaption}\item[{float}]{x,  }\item[{float}]{y,  }\item[{bool}]{is\+Top,  }\item[{ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*}}]{pipe\+Image }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pipe_adde5c27e7dd8097b3d53fd753d5c0df7}\label{class_pipe_adde5c27e7dd8097b3d53fd753d5c0df7} 
+\index{Pipe@{Pipe}!checkCollision@{checkCollision}}
+\index{checkCollision@{checkCollision}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{checkCollision()}{checkCollision()}}
+{\footnotesize\ttfamily bool Pipe\+::check\+Collision (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_object}{Game\+Object}} \&}]{other }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_ac8a27a857842bb635e32b7281d98af2b}{Game\+Object}}.
+
+\Hypertarget{class_pipe_adae5e64c88b105dc91670aeaad9bfe99}\label{class_pipe_adae5e64c88b105dc91670aeaad9bfe99} 
+\index{Pipe@{Pipe}!draw@{draw}}
+\index{draw@{draw}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Pipe\+::draw (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_a05e5306f4307d451cdbf41d83a953642}{Game\+Object}}.
+
+\Hypertarget{class_pipe_a3caa27b4a5b2b0c0518fe5303f87d4c3}\label{class_pipe_a3caa27b4a5b2b0c0518fe5303f87d4c3} 
+\index{Pipe@{Pipe}!getHeight@{getHeight}}
+\index{getHeight@{getHeight}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{getHeight()}{getHeight()}}
+{\footnotesize\ttfamily float Pipe\+::get\+Height (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pipe_a77ce646f3be408ec13c0517d64570881}\label{class_pipe_a77ce646f3be408ec13c0517d64570881} 
+\index{Pipe@{Pipe}!getWidth@{getWidth}}
+\index{getWidth@{getWidth}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{getWidth()}{getWidth()}}
+{\footnotesize\ttfamily float Pipe\+::get\+Width (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pipe_aba62c5944ba5d7d1c3dc961968e0963d}\label{class_pipe_aba62c5944ba5d7d1c3dc961968e0963d} 
+\index{Pipe@{Pipe}!isOffScreen@{isOffScreen}}
+\index{isOffScreen@{isOffScreen}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{isOffScreen()}{isOffScreen()}}
+{\footnotesize\ttfamily bool Pipe\+::is\+Off\+Screen (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b}\label{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b} 
+\index{Pipe@{Pipe}!isTop@{isTop}}
+\index{isTop@{isTop}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{isTop()}{isTop()}}
+{\footnotesize\ttfamily bool Pipe\+::is\+Top (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_pipe_aa66127299f6c88adaf82d4a31a79e3cc}\label{class_pipe_aa66127299f6c88adaf82d4a31a79e3cc} 
+\index{Pipe@{Pipe}!setSpeed@{setSpeed}}
+\index{setSpeed@{setSpeed}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{setSpeed()}{setSpeed()}}
+{\footnotesize\ttfamily void Pipe\+::set\+Speed (\begin{DoxyParamCaption}\item[{float}]{s }\end{DoxyParamCaption})}
+
+\Hypertarget{class_pipe_a5c21f37e6bf9ff0ee1c16fee62eb1039}\label{class_pipe_a5c21f37e6bf9ff0ee1c16fee62eb1039} 
+\index{Pipe@{Pipe}!update@{update}}
+\index{update@{update}!Pipe@{Pipe}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Pipe\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_game_object_ae83128d0e0efef691417779605ee037c}{Game\+Object}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_pipe_8hpp}{Pipe.\+hpp}}\item 
+src/\mbox{\hyperlink{_pipe_8cpp}{Pipe.\+cpp}}\end{DoxyCompactItemize}

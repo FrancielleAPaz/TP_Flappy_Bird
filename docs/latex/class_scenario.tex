@@ -1,0 +1,117 @@
+\doxysection{Scenario Class Reference}
+\hypertarget{class_scenario}{}\label{class_scenario}\index{Scenario@{Scenario}}
+
+
+{\ttfamily \#include $<$Scenario.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_scenario_ac81a05dad61b30116332ea971359a41e}{Scenario}} ()
+\item 
+\mbox{\hyperlink{class_scenario_aa7e7548858cbc52614d46723c0333038}{\texorpdfstring{$\sim$}{\string~}\+Scenario}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bird}{Bird}} $>$ \mbox{\hyperlink{class_scenario_a7826fdfb7fafd54f8201f52afd87313e}{get\+Bird}} () const
+\item 
+void \mbox{\hyperlink{class_scenario_a038ee23a592066c45d201a42cd2b799d}{update}} ()
+\item 
+void \mbox{\hyperlink{class_scenario_afa93a316c5e5651b57e626d94d359b67}{draw}} (\mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} state)
+\item 
+void \mbox{\hyperlink{class_scenario_a5a2201cff446cd8722d47930851654ff}{reset}} ()
+\item 
+void \mbox{\hyperlink{class_scenario_acba9d5eaf01852971b7b93e2f83b4200}{add\+Pipe}} ()
+\item 
+bool \mbox{\hyperlink{class_scenario_af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7}{check\+Collision}} ()
+\item 
+void \mbox{\hyperlink{class_scenario_ac13f56cc04ea28f1ab7ea905c31a9c39}{set\+Difficulty}} (float gravity, float pipe\+Speed)
+\item 
+int \mbox{\hyperlink{class_scenario_ab66180ec4015536e2ef14b40a78a6616}{get\+Score}} () const
+\item 
+bool \mbox{\hyperlink{class_scenario_a2effdb2ec99f959c023bb940f7b7a64c}{carregar\+Recursos}} ()
+\item 
+bool \mbox{\hyperlink{class_scenario_a3e347f28a4e0f4ad199a29c84eba6792}{is\+Play\+Button\+Clicked}} (int mouseX, int mouseY) const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_scenario_ac81a05dad61b30116332ea971359a41e}\label{class_scenario_ac81a05dad61b30116332ea971359a41e} 
+\index{Scenario@{Scenario}!Scenario@{Scenario}}
+\index{Scenario@{Scenario}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{Scenario()}{Scenario()}}
+{\footnotesize\ttfamily Scenario\+::\+Scenario (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_scenario_aa7e7548858cbc52614d46723c0333038}\label{class_scenario_aa7e7548858cbc52614d46723c0333038} 
+\index{Scenario@{Scenario}!````~Scenario@{\texorpdfstring{$\sim$}{\string~}Scenario}}
+\index{````~Scenario@{\texorpdfstring{$\sim$}{\string~}Scenario}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Scenario()}{\string~Scenario()}}
+{\footnotesize\ttfamily Scenario\+::\texorpdfstring{$\sim$}{\string~}\+Scenario (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_scenario_acba9d5eaf01852971b7b93e2f83b4200}\label{class_scenario_acba9d5eaf01852971b7b93e2f83b4200} 
+\index{Scenario@{Scenario}!addPipe@{addPipe}}
+\index{addPipe@{addPipe}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{addPipe()}{addPipe()}}
+{\footnotesize\ttfamily void Scenario\+::add\+Pipe (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_scenario_a2effdb2ec99f959c023bb940f7b7a64c}\label{class_scenario_a2effdb2ec99f959c023bb940f7b7a64c} 
+\index{Scenario@{Scenario}!carregarRecursos@{carregarRecursos}}
+\index{carregarRecursos@{carregarRecursos}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{carregarRecursos()}{carregarRecursos()}}
+{\footnotesize\ttfamily bool Scenario\+::carregar\+Recursos (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_scenario_af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7}\label{class_scenario_af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7} 
+\index{Scenario@{Scenario}!checkCollision@{checkCollision}}
+\index{checkCollision@{checkCollision}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{checkCollision()}{checkCollision()}}
+{\footnotesize\ttfamily bool Scenario\+::check\+Collision (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_scenario_afa93a316c5e5651b57e626d94d359b67}\label{class_scenario_afa93a316c5e5651b57e626d94d359b67} 
+\index{Scenario@{Scenario}!draw@{draw}}
+\index{draw@{draw}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{draw()}{draw()}}
+{\footnotesize\ttfamily void Scenario\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}}}]{state }\end{DoxyParamCaption})}
+
+\Hypertarget{class_scenario_a7826fdfb7fafd54f8201f52afd87313e}\label{class_scenario_a7826fdfb7fafd54f8201f52afd87313e} 
+\index{Scenario@{Scenario}!getBird@{getBird}}
+\index{getBird@{getBird}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{getBird()}{getBird()}}
+{\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bird}{Bird}} $>$ Scenario\+::get\+Bird (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_scenario_ab66180ec4015536e2ef14b40a78a6616}\label{class_scenario_ab66180ec4015536e2ef14b40a78a6616} 
+\index{Scenario@{Scenario}!getScore@{getScore}}
+\index{getScore@{getScore}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{getScore()}{getScore()}}
+{\footnotesize\ttfamily int Scenario\+::get\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_scenario_a3e347f28a4e0f4ad199a29c84eba6792}\label{class_scenario_a3e347f28a4e0f4ad199a29c84eba6792} 
+\index{Scenario@{Scenario}!isPlayButtonClicked@{isPlayButtonClicked}}
+\index{isPlayButtonClicked@{isPlayButtonClicked}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{isPlayButtonClicked()}{isPlayButtonClicked()}}
+{\footnotesize\ttfamily bool Scenario\+::is\+Play\+Button\+Clicked (\begin{DoxyParamCaption}\item[{int}]{mouseX,  }\item[{int}]{mouseY }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_scenario_a5a2201cff446cd8722d47930851654ff}\label{class_scenario_a5a2201cff446cd8722d47930851654ff} 
+\index{Scenario@{Scenario}!reset@{reset}}
+\index{reset@{reset}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{reset()}{reset()}}
+{\footnotesize\ttfamily void Scenario\+::reset (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\Hypertarget{class_scenario_ac13f56cc04ea28f1ab7ea905c31a9c39}\label{class_scenario_ac13f56cc04ea28f1ab7ea905c31a9c39} 
+\index{Scenario@{Scenario}!setDifficulty@{setDifficulty}}
+\index{setDifficulty@{setDifficulty}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{setDifficulty()}{setDifficulty()}}
+{\footnotesize\ttfamily void Scenario\+::set\+Difficulty (\begin{DoxyParamCaption}\item[{float}]{gravity,  }\item[{float}]{pipe\+Speed }\end{DoxyParamCaption})}
+
+\Hypertarget{class_scenario_a038ee23a592066c45d201a42cd2b799d}\label{class_scenario_a038ee23a592066c45d201a42cd2b799d} 
+\index{Scenario@{Scenario}!update@{update}}
+\index{update@{update}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{update()}{update()}}
+{\footnotesize\ttfamily void Scenario\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_scenario_8hpp}{Scenario.\+hpp}}\item 
+src/\mbox{\hyperlink{_scenario_8cpp}{Scenario.\+cpp}}\end{DoxyCompactItemize}

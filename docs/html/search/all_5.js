@@ -1,0 +1,23 @@
+var searchData=
+[
+  ['game_0',['Game',['../class_game.html',1,'Game'],['../class_game.html#ad59df6562a58a614fda24622d3715b65',1,'Game::Game()']]],
+  ['game_2ecpp_1',['Game.cpp',['../_game_8cpp.html',1,'']]],
+  ['game_2ehpp_2',['Game.hpp',['../_game_8hpp.html',1,'']]],
+  ['gameobject_3',['GameObject',['../class_game_object.html',1,'GameObject'],['../class_game_object.html#ae7a80374287aa8ae7253a990235e9bc7',1,'GameObject::GameObject()']]],
+  ['gameobject_2ecpp_4',['GameObject.cpp',['../_game_object_8cpp.html',1,'']]],
+  ['gameobject_2ehpp_5',['GameObject.hpp',['../_game_object_8hpp.html',1,'']]],
+  ['gamestate_6',['GameState',['../_game_8hpp.html#a7899b65f1ea0f655e4bbf8d2a5714285',1,'Game.hpp']]],
+  ['getapelido_7',['getApelido',['../class_player.html#a45efb5f73b4693a8803985eb35779434',1,'Player']]],
+  ['getbird_8',['getBird',['../class_scenario.html#a7826fdfb7fafd54f8201f52afd87313e',1,'Scenario']]],
+  ['getheight_9',['getHeight',['../class_bird.html#aa883a691f829aa114d9ab421d942162c',1,'Bird::getHeight()'],['../class_pipe.html#a3caa27b4a5b2b0c0518fe5303f87d4c3',1,'Pipe::getHeight()']]],
+  ['getnome_10',['getNome',['../class_player.html#a332f51619c99312fac640e8c46fb32f1',1,'Player']]],
+  ['getnumpartidas_11',['getNumPartidas',['../class_player.html#adc07186525d56f74ca0814e916d7888a',1,'Player']]],
+  ['getpontuacaomax_12',['getPontuacaoMax',['../class_player.html#a8edecf067488fc33d6ca7b9526feed84',1,'Player']]],
+  ['getpontuacaototal_13',['getPontuacaoTotal',['../class_player.html#a6e686b9d9fa85198c059f6675c5dc64f',1,'Player']]],
+  ['getscore_14',['getScore',['../class_scenario.html#ab66180ec4015536e2ef14b40a78a6616',1,'Scenario']]],
+  ['gettopplayer_15',['getTopPlayer',['../class_player_manager.html#aa6aeedf2979a754c8aec415d6179ddd2',1,'PlayerManager']]],
+  ['getvelocityy_16',['getVelocityY',['../class_bird.html#a77ace36051e1d9268c45eb97ef1118a9',1,'Bird']]],
+  ['getwidth_17',['getWidth',['../class_bird.html#a2ee1e7b5f045e4bd38c126a9cca1c52d',1,'Bird::getWidth()'],['../class_pipe.html#a77ce646f3be408ec13c0517d64570881',1,'Pipe::getWidth()']]],
+  ['getx_18',['getX',['../class_game_object.html#abe61df236efb58849b29d242d87fc59f',1,'GameObject']]],
+  ['gety_19',['getY',['../class_game_object.html#a3f55728263b9ce2407459d14b9861b04',1,'GameObject']]]
+];

@@ -1,0 +1,104 @@
+\doxysection{Player Class Reference}
+\hypertarget{class_player}{}\label{class_player}\index{Player@{Player}}
+
+
+{\ttfamily \#include $<$Player.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_aaa23b3bf80e8c0267cf08d4fe4d6ddc1}{Player}} ()=default
+\item 
+\mbox{\hyperlink{class_player_a918fc28309c958a76939631344598fb8}{Player}} (const string \&nome, const string \&apelido)
+\item 
+string \mbox{\hyperlink{class_player_a332f51619c99312fac640e8c46fb32f1}{get\+Nome}} () const
+\item 
+string \mbox{\hyperlink{class_player_a45efb5f73b4693a8803985eb35779434}{get\+Apelido}} () const
+\item 
+int \mbox{\hyperlink{class_player_adc07186525d56f74ca0814e916d7888a}{get\+Num\+Partidas}} () const
+\item 
+int \mbox{\hyperlink{class_player_a6e686b9d9fa85198c059f6675c5dc64f}{get\+Pontuacao\+Total}} () const
+\item 
+int \mbox{\hyperlink{class_player_a8edecf067488fc33d6ca7b9526feed84}{get\+Pontuacao\+Max}} () const
+\item 
+void \mbox{\hyperlink{class_player_a74821cbea6da97d5f3f66651dbe35719}{adicionar\+Pontuacao}} (int score)
+\item 
+string \mbox{\hyperlink{class_player_a2d16efac0124526072b2b6f7cb3189aa}{to\+String}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_player}{Player}} \mbox{\hyperlink{class_player_aa46c94286e178d6967af0ccc4ae8c91d}{from\+String}} (const string \&data)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_aaa23b3bf80e8c0267cf08d4fe4d6ddc1}\label{class_player_aaa23b3bf80e8c0267cf08d4fe4d6ddc1} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{class_player_a918fc28309c958a76939631344598fb8}\label{class_player_a918fc28309c958a76939631344598fb8} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{const string \&}]{nome,  }\item[{const string \&}]{apelido }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_a74821cbea6da97d5f3f66651dbe35719}\label{class_player_a74821cbea6da97d5f3f66651dbe35719} 
+\index{Player@{Player}!adicionarPontuacao@{adicionarPontuacao}}
+\index{adicionarPontuacao@{adicionarPontuacao}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{adicionarPontuacao()}{adicionarPontuacao()}}
+{\footnotesize\ttfamily void Player\+::adicionar\+Pontuacao (\begin{DoxyParamCaption}\item[{int}]{score }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_aa46c94286e178d6967af0ccc4ae8c91d}\label{class_player_aa46c94286e178d6967af0ccc4ae8c91d} 
+\index{Player@{Player}!fromString@{fromString}}
+\index{fromString@{fromString}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{fromString()}{fromString()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_player}{Player}} Player\+::from\+String (\begin{DoxyParamCaption}\item[{const string \&}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{class_player_a45efb5f73b4693a8803985eb35779434}\label{class_player_a45efb5f73b4693a8803985eb35779434} 
+\index{Player@{Player}!getApelido@{getApelido}}
+\index{getApelido@{getApelido}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getApelido()}{getApelido()}}
+{\footnotesize\ttfamily string Player\+::get\+Apelido (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_player_a332f51619c99312fac640e8c46fb32f1}\label{class_player_a332f51619c99312fac640e8c46fb32f1} 
+\index{Player@{Player}!getNome@{getNome}}
+\index{getNome@{getNome}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getNome()}{getNome()}}
+{\footnotesize\ttfamily string Player\+::get\+Nome (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_player_adc07186525d56f74ca0814e916d7888a}\label{class_player_adc07186525d56f74ca0814e916d7888a} 
+\index{Player@{Player}!getNumPartidas@{getNumPartidas}}
+\index{getNumPartidas@{getNumPartidas}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getNumPartidas()}{getNumPartidas()}}
+{\footnotesize\ttfamily int Player\+::get\+Num\+Partidas (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_player_a8edecf067488fc33d6ca7b9526feed84}\label{class_player_a8edecf067488fc33d6ca7b9526feed84} 
+\index{Player@{Player}!getPontuacaoMax@{getPontuacaoMax}}
+\index{getPontuacaoMax@{getPontuacaoMax}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getPontuacaoMax()}{getPontuacaoMax()}}
+{\footnotesize\ttfamily int Player\+::get\+Pontuacao\+Max (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_player_a6e686b9d9fa85198c059f6675c5dc64f}\label{class_player_a6e686b9d9fa85198c059f6675c5dc64f} 
+\index{Player@{Player}!getPontuacaoTotal@{getPontuacaoTotal}}
+\index{getPontuacaoTotal@{getPontuacaoTotal}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{getPontuacaoTotal()}{getPontuacaoTotal()}}
+{\footnotesize\ttfamily int Player\+::get\+Pontuacao\+Total (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_player_a2d16efac0124526072b2b6f7cb3189aa}\label{class_player_a2d16efac0124526072b2b6f7cb3189aa} 
+\index{Player@{Player}!toString@{toString}}
+\index{toString@{toString}!Player@{Player}}
+\doxysubsubsection{\texorpdfstring{toString()}{toString()}}
+{\footnotesize\ttfamily string Player\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_player_8hpp}{Player.\+hpp}}\item 
+src/\mbox{\hyperlink{_player_8cpp}{Player.\+cpp}}\end{DoxyCompactItemize}
