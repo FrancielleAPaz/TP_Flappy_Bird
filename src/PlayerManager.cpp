@@ -95,3 +95,8 @@ void PlayerManager::listarJogadores() const {
         cout << par.second.toString() << endl;
     }
 }
+
+const std::map<std::string, Player>& PlayerManager::getPlayersMap() const {
+    return players;
+}
+
