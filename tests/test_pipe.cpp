@@ -1,11 +1,11 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include "doctest.h"
 #include "Pipe.hpp"
 
-ALLEGRO_BITMAP* dummyBitmap = nullptr;
+extern ALLEGRO_BITMAP* dummyBitmap;
 TEST_CASE("Pipe - Movimento")
 {
-    Pipe p(0.0f, 500.0f, false, dummyBitmap);
+    Pipe p(100.0f, 500.0f, false, dummyBitmap);
+    p.setSpeed(-5.0f);
     float xAntes = p.getX();
     p.update();
     CHECK(p.getX() < xAntes);
@@ -13,8 +13,8 @@ TEST_CASE("Pipe - Movimento")
 
 TEST_CASE("Pipe - Is Off Screen")
 {
-    Pipe p(0.0f, -100.0f, false, dummyBitmap);
-    CHECK(p.isOffScreen());
+    Pipe p(-200.0f, 0.0f, false, dummyBitmap);
+    CHECK(p.isOffScreen()==true);
 }
 
 TEST_CASE("Pipe - Is Top()")

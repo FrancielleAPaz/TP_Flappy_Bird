@@ -1,9 +1,8 @@
-#define DOCTEST_CONFIG_IMPLEMENT_WITH_MAIN
 #include <allegro5/allegro.h>
 #include "doctest.h"
 #include "../include/PlayerManager.hpp"
 
-ALLEGRO_BITMAP* dummyBitmap = nullptr;
+extern ALLEGRO_BITMAP* dummyBitmap;
 TEST_CASE("PlayerManager - Registrar e Buscar")
 {
     PlayerManager pm;
@@ -30,4 +29,17 @@ TEST_CASE("PlayerManager - Atualizar pontuação")
     Player* p = pm.buscarPlayer("Mila");
     REQUIRE (p != nullptr);
     CHECK (p->getPontuacaoMax() == 30);
+}
+
+TEST_CASE("PlayerManage - Top Player")
+{
+    PlayerManager pm;
+    pm.registrarPlayer("Gabriel", "Biel");
+    pm.registrarPlayer("Fernanda", "Nanda");
+
+    pm.atualizarPontuacao("Biel",15);
+    pm.atualizarPontuacao("Nanda",20);
+    
+    
+
 }

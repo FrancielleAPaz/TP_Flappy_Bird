@@ -36,9 +36,9 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 # Testes
 test: $(TEST_TARGET)
 
-$(TEST_TARGET): $(TEST_SRCS)
+$(TEST_TARGET): $(TEST_SRCS) $(wildcard $(SRC_DIR)/*.cpp)
 	@mkdir -p $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) $^ -o $@ $(LDFLAGS)
+	$(CXX) $(CXXFLAGS) tests/main_tests.cpp tests/test_bird.cpp tests/test_pipe.cpp tests/test_player.cpp tests/test_playermanager.cpp tests/test_scenario.cpp src/Bird.cpp src/Game.cpp src/GameObject.cpp src/Pipe.cpp src/Player.cpp src/PlayerManager.cpp src/Scenario.cpp -o $@ $(LDFLAGS)
 
 run_test: test
 	./$(TEST_TARGET)

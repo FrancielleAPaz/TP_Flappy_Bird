@@ -1,5 +1,6 @@
 Jogador|123|1|0|0
 Jogador|1234|1|2|2
+Jogador|Camila|3|4|3
 Jogador|amorim|1|2|2
 Jogador|testando|1|8|8
 Jogador|teste1|1|1|1
