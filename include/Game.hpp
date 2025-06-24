@@ -35,7 +35,7 @@ private:
     Scenario scenario;
     PlayerManager playerManager;
     std::string jogadorAtual;
-    std::string nomeDigitado;
+    std::string nomeDigitado = "";
     bool nomeConfirmado = false;
 
     std::string opcaoDigitada = "";
@@ -54,6 +54,7 @@ private:
     void telaInserirJogador();
     void telaRemoverJogador();
     void telaMostrarPlacar();
+    void Menu();
 
 
 public:
