@@ -4,7 +4,9 @@
 
 using namespace std;
 
-PlayerManager::PlayerManager() {}
+PlayerManager::PlayerManager() {
+     carregarDeArquivo("data/players.txt");
+}
 
 bool PlayerManager::registrarPlayer(const string& nome, const string& apelido) {
 
@@ -71,7 +73,12 @@ void PlayerManager::salvarEmArquivo(const string& filename) const {
 void PlayerManager::carregarDeArquivo(const string& filename) {
 
     ifstream arquivo(filename);
-    if (!arquivo.is_open()) return;
+    if (!arquivo.is_open()) {
+    // Se o arquivo não existir, cria vazio
+    ofstream criaArquivo(filename);
+    criaArquivo.close();
+    return;
+}
 
     string linha;
     while (getline(arquivo, linha)) {

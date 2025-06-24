@@ -85,12 +85,16 @@ Game::~Game() {
 // Loop principal do jogo
 void Game::run(const std::string& apelido) {
     // Armazena apelido do jogador atual
-    //jogadorAtual = apelido;
+    jogadorAtual = apelido;
+
+    // Carrega os dados dos jogadores já existentes
+    playerManager.carregarDeArquivo("data/players.txt");
 
     // Cadastra ou recupera jogador
-    //if (!playerManager.buscarPlayer(apelido)) {
-        //playerManager.registrarPlayer("Jogador", apelido);
-    //}
+    if (!playerManager.buscarPlayer(apelido)) {
+        std::cout << "[INFO] Jogador não encontrado. Será criado um novo.\n";
+        playerManager.registrarPlayer("Jogador", apelido);
+    }
     
     al_start_timer(timer);
 
@@ -120,9 +124,9 @@ void Game::run(const std::string& apelido) {
     }
 
     // Atualizar pontuação no PlayerManager após perder
-    //playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
+    playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
     // Salvar dados no arquivo
-    //playerManager.salvarEmArquivo();
+    playerManager.salvarEmArquivo("data/players.txt");
 }
 
 // Trata entradas do teclado de acordo com o estado atual
