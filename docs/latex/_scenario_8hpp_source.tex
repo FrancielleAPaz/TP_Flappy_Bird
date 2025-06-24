@@ -1,0 +1,71 @@
+\doxysection{Scenario.\+hpp}
+\hypertarget{_scenario_8hpp_source}{}\label{_scenario_8hpp_source}\index{include/Scenario.hpp@{include/Scenario.hpp}}
+\mbox{\hyperlink{_scenario_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <allegro5/allegro.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_font.h>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\#include\ "{}Game.hpp"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_bird_8hpp}{Bird.hpp}}"{}}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_pipe_8hpp}{Pipe.hpp}}"{}}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\#include\ "{}PlayerManager.hpp"{}}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game}{Game}};\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{GameState}};}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_scenario}{Scenario}}\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ std::shared\_ptr<Bird>\ bird;}
+\DoxyCodeLine{00020\ \ \ \ \ std::vector<std::shared\_ptr<Pipe>>\ pipes;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{/*Variáveis\ bases\ da\ dinâmica\ do\ jogo:\ pontuação,\ gravidade,\ velocidade\ de\ movimento\ dos\ pipes,}}
+\DoxyCodeLine{00023\ \textcolor{comment}{\ \ \ \ \ espaço\ entre\ os\ pipes,\ contador\ de\ pipes\ por\ frame\ e\ um\ detector\ de\ pontuação\ bool.}}
+\DoxyCodeLine{00024\ \textcolor{comment}{\ \ \ \ \ */}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{int}\ score;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{float}\ gravity;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{float}\ pipeSpeed;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{float}\ spaceBetweenPipes;}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{int}\ pipeSpawnCounter;}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ addScoreFlag;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ ALLEGRO\_BITMAP*\ background;}
+\DoxyCodeLine{00033\ \ \ \ \ ALLEGRO\_BITMAP*\ logo;}
+\DoxyCodeLine{00034\ \ \ \ \ ALLEGRO\_BITMAP*\ gameover\_image;}
+\DoxyCodeLine{00035\ \ \ \ \ ALLEGRO\_BITMAP*\ floor\_image;}
+\DoxyCodeLine{00036\ \ \ \ \ ALLEGRO\_FONT*\ font;}
+\DoxyCodeLine{00037\ \ \ \ \ ALLEGRO\_BITMAP*\ button\_play;}
+\DoxyCodeLine{00038\ \ \ \ \ ALLEGRO\_BITMAP*\ topPipeImage;}
+\DoxyCodeLine{00039\ \ \ \ \ ALLEGRO\_BITMAP*\ bottomPipeImage;}
+\DoxyCodeLine{00040\ \ \ \ \ ALLEGRO\_BITMAP*\ birdImage;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ Coordenadas\ e\ tamanhos\ do\ button\_play}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{float}\ playBtnX\ =\ 440;}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{float}\ playBtnY\ =\ 200;}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{float}\ playBtnW\ =\ 120;}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{float}\ playBtnH\ =\ 60;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{int}\ cx1,\ cx2;\ \textcolor{comment}{//\ Para\ o\ movimento\ do\ chão}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{class_scenario_ac81a05dad61b30116332ea971359a41e}{Scenario}}();}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{class_scenario_aa7e7548858cbc52614d46723c0333038}{\string~Scenario}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ std::shared\_ptr<Bird>\ \mbox{\hyperlink{class_scenario_a7826fdfb7fafd54f8201f52afd87313e}{getBird}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scenario_a038ee23a592066c45d201a42cd2b799d}{update}}();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scenario_afa93a316c5e5651b57e626d94d359b67}{draw}}(\mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{GameState}}\ state);}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scenario_a5a2201cff446cd8722d47930851654ff}{reset}}();}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scenario_acba9d5eaf01852971b7b93e2f83b4200}{addPipe}}();}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_scenario_af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7}{checkCollision}}();}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_scenario_ac13f56cc04ea28f1ab7ea905c31a9c39}{setDifficulty}}(\textcolor{keywordtype}{float}\ gravity,\ \textcolor{keywordtype}{float}\ pipeSpeed);}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_scenario_ab66180ec4015536e2ef14b40a78a6616}{getScore}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_scenario_a2effdb2ec99f959c023bb940f7b7a64c}{carregarRecursos}}();\ \textcolor{comment}{//\ Retorna\ true\ se\ tudo\ carregou\ corretamente}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_scenario_a3e347f28a4e0f4ad199a29c84eba6792}{isPlayButtonClicked}}(\textcolor{keywordtype}{int}\ mouseX,\ \textcolor{keywordtype}{int}\ mouseY)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \};}
+
+\end{DoxyCode}

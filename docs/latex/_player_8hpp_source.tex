@@ -1,0 +1,40 @@
+\doxysection{Player.\+hpp}
+\hypertarget{_player_8hpp_source}{}\label{_player_8hpp_source}\index{include/Player.hpp@{include/Player.hpp}}
+\mbox{\hyperlink{_player_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#ifndef\ PLAYER\_HPP}}
+\DoxyCodeLine{00002\ \textcolor{preprocessor}{\#define\ PLAYER\_HPP}}
+\DoxyCodeLine{00003\ }
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{using\ namespace\ }std;}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_player}{Player}}\ \{\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ name;}
+\DoxyCodeLine{00013\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ nickname;}
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ numPartidas;}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pontuacaoTotal;}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ pontuacaoMax;\ \textcolor{comment}{//\ maior\ pontuação\ do\ jogador}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_aaa23b3bf80e8c0267cf08d4fe4d6ddc1}{Player}}()\ =\ \textcolor{keywordflow}{default};\ \textcolor{comment}{//\ Construtor\ padrão\ necessário\ para\ o\ std::map}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{class_player_aaa23b3bf80e8c0267cf08d4fe4d6ddc1}{Player}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ nome,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ apelido);\ \textcolor{comment}{//construtor\ que\ cria\ um\ jogador\ novo\ com\ nome\ e\ apelido\ informados}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_player_a332f51619c99312fac640e8c46fb32f1}{getNome}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_player_a45efb5f73b4693a8803985eb35779434}{getApelido}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_player_adc07186525d56f74ca0814e916d7888a}{getNumPartidas}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_player_a6e686b9d9fa85198c059f6675c5dc64f}{getPontuacaoTotal}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_player_a8edecf067488fc33d6ca7b9526feed84}{getPontuacaoMax}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_player_a74821cbea6da97d5f3f66651dbe35719}{adicionarPontuacao}}(\textcolor{keywordtype}{int}\ score);\ \textcolor{comment}{//Método\ que\ atualiza\ as\ estatísticas\ do\ jogador\ após\ uma\ partida}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{string}\ \mbox{\hyperlink{class_player_a2d16efac0124526072b2b6f7cb3189aa}{toString}}()\ \textcolor{keyword}{const};\ \textcolor{comment}{//\ cria\ uma\ string\ formatada\ para\ salvar\ em\ arquivo}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_player}{Player}}\ \mbox{\hyperlink{class_player_aa46c94286e178d6967af0ccc4ae8c91d}{fromString}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{string}\&\ data);\ \textcolor{comment}{//lê\ essa\ string\ e\ cria\ um\ objeto\ Player,\ para\ carregar\ os\ dados\ de\ volta}}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

@@ -1,0 +1,93 @@
+\doxysection{Player\+Manager Class Reference}
+\hypertarget{class_player_manager}{}\label{class_player_manager}\index{PlayerManager@{PlayerManager}}
+
+
+{\ttfamily \#include $<$Player\+Manager.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_player_manager_ae093e4e4e7eecdf5b46de72f5827d71d}{Player\+Manager}} ()
+\item 
+bool \mbox{\hyperlink{class_player_manager_a6f49d98dc0b63dc6259601f02eeb6852}{registrar\+Player}} (const string \&nome, const string \&apelido)
+\item 
+bool \mbox{\hyperlink{class_player_manager_a954356bdcf86feacb8e11cd2dc63114b}{remover\+Player}} (const string \&apelido)
+\item 
+\mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_player_manager_a2213328fd7a795acc9404c1597ad71e8}{buscar\+Player}} (const string \&apelido)
+\item 
+void \mbox{\hyperlink{class_player_manager_a62aaddaa7e7ef7fa313ea26305db229b}{atualizar\+Pontuacao}} (const string \&apelido, int score)
+\item 
+\mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_player_manager_aa6aeedf2979a754c8aec415d6179ddd2}{get\+Top\+Player}} () const
+\item 
+void \mbox{\hyperlink{class_player_manager_a2245a1517812e68d7f9be1673152be6a}{salvar\+Em\+Arquivo}} (const string \&filename) const
+\item 
+void \mbox{\hyperlink{class_player_manager_a4983a56f0cccd9ea0b8bbb3857485c3e}{carregar\+De\+Arquivo}} (const string \&filename)
+\item 
+void \mbox{\hyperlink{class_player_manager_ac94da6c067f7e3d57710e991ae82730e}{listar\+Jogadores}} () const
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_player_manager_ae093e4e4e7eecdf5b46de72f5827d71d}\label{class_player_manager_ae093e4e4e7eecdf5b46de72f5827d71d} 
+\index{PlayerManager@{PlayerManager}!PlayerManager@{PlayerManager}}
+\index{PlayerManager@{PlayerManager}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{PlayerManager()}{PlayerManager()}}
+{\footnotesize\ttfamily Player\+Manager\+::\+Player\+Manager (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_player_manager_a62aaddaa7e7ef7fa313ea26305db229b}\label{class_player_manager_a62aaddaa7e7ef7fa313ea26305db229b} 
+\index{PlayerManager@{PlayerManager}!atualizarPontuacao@{atualizarPontuacao}}
+\index{atualizarPontuacao@{atualizarPontuacao}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{atualizarPontuacao()}{atualizarPontuacao()}}
+{\footnotesize\ttfamily void Player\+Manager\+::atualizar\+Pontuacao (\begin{DoxyParamCaption}\item[{const string \&}]{apelido,  }\item[{int}]{score }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_manager_a2213328fd7a795acc9404c1597ad71e8}\label{class_player_manager_a2213328fd7a795acc9404c1597ad71e8} 
+\index{PlayerManager@{PlayerManager}!buscarPlayer@{buscarPlayer}}
+\index{buscarPlayer@{buscarPlayer}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{buscarPlayer()}{buscarPlayer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*} Player\+Manager\+::buscar\+Player (\begin{DoxyParamCaption}\item[{const string \&}]{apelido }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_manager_a4983a56f0cccd9ea0b8bbb3857485c3e}\label{class_player_manager_a4983a56f0cccd9ea0b8bbb3857485c3e} 
+\index{PlayerManager@{PlayerManager}!carregarDeArquivo@{carregarDeArquivo}}
+\index{carregarDeArquivo@{carregarDeArquivo}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{carregarDeArquivo()}{carregarDeArquivo()}}
+{\footnotesize\ttfamily void Player\+Manager\+::carregar\+De\+Arquivo (\begin{DoxyParamCaption}\item[{const string \&}]{filename }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_manager_aa6aeedf2979a754c8aec415d6179ddd2}\label{class_player_manager_aa6aeedf2979a754c8aec415d6179ddd2} 
+\index{PlayerManager@{PlayerManager}!getTopPlayer@{getTopPlayer}}
+\index{getTopPlayer@{getTopPlayer}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{getTopPlayer()}{getTopPlayer()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{class_player}{Player}} \texorpdfstring{$\ast$}{*} Player\+Manager\+::get\+Top\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_player_manager_ac94da6c067f7e3d57710e991ae82730e}\label{class_player_manager_ac94da6c067f7e3d57710e991ae82730e} 
+\index{PlayerManager@{PlayerManager}!listarJogadores@{listarJogadores}}
+\index{listarJogadores@{listarJogadores}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{listarJogadores()}{listarJogadores()}}
+{\footnotesize\ttfamily void Player\+Manager\+::listar\+Jogadores (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_player_manager_a6f49d98dc0b63dc6259601f02eeb6852}\label{class_player_manager_a6f49d98dc0b63dc6259601f02eeb6852} 
+\index{PlayerManager@{PlayerManager}!registrarPlayer@{registrarPlayer}}
+\index{registrarPlayer@{registrarPlayer}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{registrarPlayer()}{registrarPlayer()}}
+{\footnotesize\ttfamily bool Player\+Manager\+::registrar\+Player (\begin{DoxyParamCaption}\item[{const string \&}]{nome,  }\item[{const string \&}]{apelido }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_manager_a954356bdcf86feacb8e11cd2dc63114b}\label{class_player_manager_a954356bdcf86feacb8e11cd2dc63114b} 
+\index{PlayerManager@{PlayerManager}!removerPlayer@{removerPlayer}}
+\index{removerPlayer@{removerPlayer}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{removerPlayer()}{removerPlayer()}}
+{\footnotesize\ttfamily bool Player\+Manager\+::remover\+Player (\begin{DoxyParamCaption}\item[{const string \&}]{apelido }\end{DoxyParamCaption})}
+
+\Hypertarget{class_player_manager_a2245a1517812e68d7f9be1673152be6a}\label{class_player_manager_a2245a1517812e68d7f9be1673152be6a} 
+\index{PlayerManager@{PlayerManager}!salvarEmArquivo@{salvarEmArquivo}}
+\index{salvarEmArquivo@{salvarEmArquivo}!PlayerManager@{PlayerManager}}
+\doxysubsubsection{\texorpdfstring{salvarEmArquivo()}{salvarEmArquivo()}}
+{\footnotesize\ttfamily void Player\+Manager\+::salvar\+Em\+Arquivo (\begin{DoxyParamCaption}\item[{const string \&}]{filename }\end{DoxyParamCaption}) const}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/\mbox{\hyperlink{_player_manager_8hpp}{Player\+Manager.\+hpp}}\item 
+src/\mbox{\hyperlink{_player_manager_8cpp}{Player\+Manager.\+cpp}}\end{DoxyCompactItemize}

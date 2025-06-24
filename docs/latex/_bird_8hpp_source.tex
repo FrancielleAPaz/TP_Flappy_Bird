@@ -1,0 +1,46 @@
+\doxysection{Bird.\+hpp}
+\hypertarget{_bird_8hpp_source}{}\label{_bird_8hpp_source}\index{include/Bird.hpp@{include/Bird.hpp}}
+\mbox{\hyperlink{_bird_8hpp}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_game_object_8hpp}{GameObject.hpp}}"{}}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <allegro5/allegro.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_image.h>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_bird}{Bird}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{class_game_object}{GameObject}}\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00009\ \ \ \ \ \textcolor{keywordtype}{float}\ velocityY;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Velocidade\ vertical}}
+\DoxyCodeLine{00010\ \ \ \ \ \textcolor{keywordtype}{bool}\ isAlive;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Estado\ do\ pássaro}}
+\DoxyCodeLine{00011\ \ \ \ \ ALLEGRO\_BITMAP*\ sprite;\ \ \ \textcolor{comment}{//\ Sprite\ do\ pássaro\ (com\ 3\ frames)}}
+\DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{float}\ frameWidth;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Largura\ de\ cada\ frame}}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{keywordtype}{float}\ height;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Altura\ do\ pássaro}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{int}\ currentFrame;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Frame\ atual\ da\ animação\ (0,\ 1,\ 2)}}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keywordtype}{double}\ lastFrameTime;\ \ \ \ \ \textcolor{comment}{//\ Tempo\ do\ último\ frame}}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keywordtype}{float}\ animationSpeed;\ \ \ \ \ \textcolor{comment}{//\ Velocidade\ da\ animação}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_bird_a40fdabf18beaf976b1a9dc9b9763c303}{Bird}}(\textcolor{keywordtype}{float}\ startX,\ \textcolor{keywordtype}{float}\ startY,\ ALLEGRO\_BITMAP*\ sprite);}
+\DoxyCodeLine{00020\ \ \ \ \ }
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{comment}{//\ Métodos\ necessários}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bird_aeb4af5af51374ccfdf3e9a5aaf40c7b6}{applyGravity}}(\textcolor{keywordtype}{float}\ gravity);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bird_ae295f7338e168cd216a569d07866743c}{update}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bird_ad88ff6df269c029bb1519f4e8ebc598a}{draw}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bird_aada45d9d87c71368e277554b0ccc6f10}{checkCollision}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_game_object}{GameObject}}\&\ other)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bird_a0d0d4bde95fabd21363c2e905aa1fefc}{kill}}();}
+\DoxyCodeLine{00027\ \ \ \ \ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ Controle\ do\ pássaro}}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bird_aaf8f7cdda8f072ee9d2643da8dc71ad6}{jump}}();}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bird_a89d40831dcd54751b9507f51bb98b4f6}{reset}}();}
+\DoxyCodeLine{00031\ \ \ \ \ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_bird_a3ac9f019b69bbafb279d3e93988d4dc1}{isDead}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_bird_a77ace36051e1d9268c45eb97ef1118a9}{getVelocityY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_bird_a2ee1e7b5f045e4bd38c126a9cca1c52d}{getWidth}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_bird_aa883a691f829aa114d9ab421d942162c}{getHeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ \ \ \ \ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{comment}{//\ Configuração\ da\ animação}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_bird_aec25f2e05e3668df8396ba77bb897d1f}{setAnimationSpeed}}(\textcolor{keywordtype}{float}\ speed);}
+\DoxyCodeLine{00040\ \};}
+
+\end{DoxyCode}
