@@ -8,6 +8,7 @@
 #include <allegro5/allegro_audio.h>
 #include <allegro5/allegro_acodec.h>
 
+
 #include "Scenario.hpp"
 #include "PlayerManager.hpp"
 #include <string>
@@ -36,6 +37,24 @@ private:
     std::string jogadorAtual;
     std::string nomeDigitado;
     bool nomeConfirmado = false;
+
+    std::string opcaoDigitada = "";
+    char opcaoEscolhida = '\0';
+    bool opcaoConfirmada = false;
+    std::string mensagemMenu = ""; // Para mensagens como "Jogador criado" ou "Jogador não encontrado"
+
+    std::string apelidoParaRemover;
+    bool remocaoConfirmada = false;
+
+    bool showCursor = true;  
+    double cursorTimer = 0.0; 
+
+    const double CURSOR_BLINK_RATE = 0.5;
+
+    void telaInserirJogador();
+    void telaRemoverJogador();
+    void telaMostrarPlacar();
+
 
 public:
     Game();
