@@ -7,6 +7,8 @@
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
 #include <allegro5/allegro_image.h>
+#include <stdexcept>  // Para std::runtime_error, std::invalid_argument
+#include <cmath>      // Para std::isnan, std::isfinite
 
 
 // Construtor
@@ -39,7 +41,13 @@ bool Scenario::carregarRecursos() {
         return false;
     }
 
-    bird = std::make_shared<Bird>(500, 300, birdImage);
+    // Criação do pássaro com verificação de recurso
+    try {
+        bird = std::make_shared<Bird>(500, 300, birdImage);
+    } catch (const std::exception& e) {
+        std::cerr << "[ERRO] Falha ao criar pássaro: " << e.what() << "\n";
+        return false;
+    }
 
     return true;
 }
@@ -56,17 +64,26 @@ Scenario::~Scenario() {
     if (birdImage) al_destroy_bitmap(birdImage);
 }
 
-// Retorna o ponteiro para o pássaro
+// Retorna o ponteiro para o pássaro com verificação
 std::shared_ptr<Bird> Scenario::getBird() const {
+    if (!bird) {
+        throw std::runtime_error("Bird não inicializado");
+    }
     return bird;
 }
 
 ALLEGRO_FONT* Scenario::getFont() const {
-    return font;  // Retorna o ponteiro da fonte carregada
+    if (!font) {
+        throw std::runtime_error("Fonte não carregada");
+    }
+    return font;
 }
 
 ALLEGRO_BITMAP* Scenario::getBackground() const {
-    return background; // Retorna o ponteiro para o bitmap do background
+    if (!background) {
+        throw std::runtime_error("Background não carregado");
+    }
+    return background;
 }
 
 // Atualiza todos os objetos e lógica da partida e retorna se um ponto foi adicionado
@@ -192,25 +209,42 @@ void Scenario::addPipe() {
     pipes.push_back(pipeBottom);
 }
 
-// Verifica colisões entre o pássaro e os canos
+// Verifica colisões com tratamento de erros
 bool Scenario::checkCollision() {
-    for (const auto& pipe : pipes) {
-        if (bird->checkCollision(*pipe)) {
-            bird->kill();  // marca o pássaro como morto
-            return true;
-        }
+    if (!bird) {
+        return false; // Não há pássaro para colidir
     }
 
-    if (bird->getY() < 0 || bird->getY() + bird->getHeight() > 600) {
-        bird->kill();  // morreu ao tocar no chão ou teto
-        return true;
+    try {
+        for (const auto& pipe : pipes) {
+            if (pipe && bird->checkCollision(*pipe)) {
+                bird->kill();
+                return true;
+            }
+        }
+
+        // Verificação de limites da tela
+        if (bird->getY() < 0 || bird->getY() + bird->getHeight() > 600) {
+            bird->kill();
+            return true;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "[ERRO] Verificação de colisão: " << e.what() << "\n";
     }
 
     return false;
 }
 
-// Define configurações como gravidade e velocidade dos obstáculos
+// Define configurações com validação
 void Scenario::setDifficulty(float g, float speed) {
+    // Validação de parâmetros
+    if (std::isnan(g) || !std::isfinite(g)) {
+        throw std::invalid_argument("Gravidade inválida");
+    }
+    if (std::isnan(speed) || !std::isfinite(speed) || speed <= 0) {
+        throw std::invalid_argument("Velocidade inválida");
+    }
+
     gravity = g;
     pipeSpeed = speed;
 }

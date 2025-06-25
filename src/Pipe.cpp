@@ -1,4 +1,8 @@
 #include "Pipe.hpp"
+#include <stdexcept>  // Para std::invalid_argument, std::runtime_error
+#include <cmath>      // Para std::isnan
+#include <iostream>   // Para std::cerr
+
 
 // Largura padrão do cano
 const float Pipe::WIDTH = 80.0f;
@@ -56,12 +60,20 @@ float Pipe::getWidth() const {
     return WIDTH;
 }
 
-// Retorna a altura do cano
+// Retorna a altura do cano com verificação de recurso
 float Pipe::getHeight() const {
-    return al_get_bitmap_height(image);
+    // Verificação crítica antes de acessar recurso
+    if (image == nullptr) {
+        throw std::runtime_error("Não foi possivel pegar a altura do cano: imagem nula");
+    }
+    return static_cast<float>(al_get_bitmap_height(image));
 }
 
-// Define a velocidade do cano
+// Define a velocidade do cano com validação
 void Pipe::setSpeed(float s) {
+    // Validação de parâmetro
+    if (std::isnan(s)) {
+        throw std::invalid_argument("Velcoidade do cano não pode ser nan");
+    }
     speed = s;
 }

@@ -414,37 +414,54 @@ void Game::run() {
         switch (event.type) {
         case ALLEGRO_EVENT_TIMER:
             if (currentState == GameState::JOGANDO && !gameOverAtivo) {
-                bool scoredThisFrame = scenario.updateAndCheckScore();
-                if (scoredThisFrame && som_score) {
-                    al_play_sample(som_score, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
-                }
+                // Atualização do cenário com tratamento de erros
+                try {
+                    bool scoredThisFrame = scenario.updateAndCheckScore();
+                    if (scoredThisFrame && som_score) {
+                        al_play_sample(som_score, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+                    }
 
-                if (scenario.checkCollision()) {
-                    showGameOver();
+                    if (scenario.checkCollision()) {
+                        showGameOver();
 
-                    // Atualiza e salva pontuação após morrer
-                    playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
-                    playerManager.salvarEmArquivo("data/players.txt");
+                        // Atualização de pontuação com tratamento de erros
+                        try {
+                            playerManager.atualizarPontuacao(jogadorAtual, scenario.getScore());
+                            playerManager.salvarEmArquivo("data/players.txt");
+                        } catch (const std::exception& e) {
+                            std::cerr << "[ERRO] Falha ao atualizar pontuação: " << e.what() << "\n";
+                        }
 
-                    // Ativa tela de game over e pausa jogo
-                    gameOverAtivo = true;
+                        gameOverAtivo = true;
+                    }
+                } catch (const std::exception& e) {
+                    std::cerr << "[ERRO] Falha na atualização do jogo: " << e.what() << "\n";
                 }
             }
 
-            scenario.draw(currentState);
-            al_flip_display();
+            // Renderização com tratamento de erros
+            try {
+                scenario.draw(currentState);
+                al_flip_display();
+            } catch (const std::exception& e) {
+                std::cerr << "[ERRO] Falha na renderização: " << e.what() << "\n";
+            }
             break;
 
         case ALLEGRO_EVENT_KEY_DOWN:
             if (gameOverAtivo) {
-                // Se jogador apertar Espaço ou Enter, reinicia jogo
-                if (event.keyboard.keycode == ALLEGRO_KEY_SPACE || event.keyboard.keycode == ALLEGRO_KEY_ENTER) {
-                    // Resetar jogo e iniciar novamente
-                    scenario.reset();
-                    currentState = GameState::JOGANDO;
-                    gameOverAtivo = false;
+                // Teclas de reinício com verificação de estado
+                if (event.keyboard.keycode == ALLEGRO_KEY_SPACE || 
+                    event.keyboard.keycode == ALLEGRO_KEY_ENTER) {
+                    
+                    try {
+                        scenario.reset();
+                        currentState = GameState::JOGANDO;
+                        gameOverAtivo = false;
+                    } catch (const std::exception& e) {
+                        std::cerr << "[ERRO] Falha ao reiniciar cenario: " << e.what() << "\n";
+                    }
                 } else {
-                    // Qualquer outra tecla volta ao menu
                     gameOverAtivo = false;
                     currentState = GameState::INICIO;
                     opcaoConfirmada = false;
@@ -462,15 +479,26 @@ void Game::run() {
     }
 }
 
+
 // Trata entradas do teclado de acordo com o estado atual
 void Game::handleInput(int keycode) {
-    // Configurando para tocar o som jump.ogg ao pressionar space
-    if (keycode == ALLEGRO_KEY_SPACE) { //
-        if (som_pulo) { // Toca o som de pulo apenas se ele foi carregado com sucesso
-            al_play_sample(som_pulo, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr); //
+    // Verificação defensiva: ação de pulo
+    if (keycode == ALLEGRO_KEY_SPACE) {
+        if (som_pulo) {
+            try {
+                al_play_sample(som_pulo, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+            } catch (...) {
+                std::cerr << "[AVISO] Falha ao reproduzir som de pulo\n";
+            }
         }
-        if(scenario.getBird()){ //
-            scenario.getBird()->jump(); //
+        
+        // Verificação de objeto bird válido
+        if (scenario.getBird()) {
+            try {
+                scenario.getBird()->jump();
+            } catch (const std::exception& e) {
+                std::cerr << "[ERRO] Falha no pulo: " << e.what() << "\n";
+            }
         }
     }
 
@@ -494,15 +522,26 @@ void Game::handleInput(int keycode) {
 
 // Mostra tela de game over, muda estado para PERDEU
 void Game::showGameOver() {
-    // Configurando som de morte no momento em que o jogador perder
-    if (som_morte) { // Toca o som de morte apenas se ele foi carregado com sucesso
-        al_play_sample(som_morte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr); //
+    // Reprodução de som com verificação defensiva
+    if (som_morte) {
+        try {
+            al_play_sample(som_morte, 1.0, 0.0, 1.0, ALLEGRO_PLAYMODE_ONCE, nullptr);
+        } catch (...) {
+            std::cerr << "[AVISO] Falha ao reproduzir som de morte\n";
+        }
     }
     currentState = GameState::PERDEU;
 }
 
 // Reinicia a partida mantendo o jogador atual
 void Game::startNewRound() {
-    scenario.reset();
-    currentState = GameState::JOGANDO;
+    // Reinicialização com tratamento de erros
+    try {
+        scenario.reset();
+        currentState = GameState::JOGANDO;
+    } catch (const std::exception& e) {
+        std::cerr << "[ERRO] Falha ao reiniciar partida: " << e.what() << "\n";
+        // Tentativa de recuperação
+        currentState = GameState::INICIO;
+    }
 }
