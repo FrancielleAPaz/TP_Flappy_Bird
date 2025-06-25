@@ -20,6 +20,7 @@ Compilador C++ compatível com C++17;
 Biblioteca Allegro 5 instalada com seus módulos completos;
 make para facilitar a compilação;
 doctest para execução dos testes unitários;
+OBS: O Makefile está configurado para rodar em ambiente linux
 
 ## Estrutura do projeto
 TP_Flappy_Bird/
@@ -71,7 +72,7 @@ TP_Flappy_Bird/
 ├── README.md               
 └── test_players.txt        
 
-## Testes
+## Teste
 Todos os testes são escritos com a biblioteca **doctest** e cobrem:
 Bird: movimentação e colisão;
 Pipe: velocidade e pontuação;
@@ -103,8 +104,8 @@ No Linux, instale as dependências (Debian/Ubuntu): sudo apt-get install liballe
 No macOS, use brew: brew install allegro.
 
 ## Dificuldades 
-Configuração da biblioteca Allegro e problemas de linkagem/ compilação;
-Configuração do Makefiçe para compilar corretamente todos os módulos e os testes;
+Integração e Configuração do Ambiente (Linux vs Windows): A diferença entre ambientes de desenvolvimento do grupo (WSL/Linux vs Windows puro), gerando problemas com bibliotecas específicas, como a necessidade de .dll no Windows e conflitos no Makefile;  
+Difculdade com o carregamento de recursos, principalemnte os sons; Configuração da biblioteca Allegro e problemas de linkagem/ compilação; O jogo não rodava porque o sistema não encontrava as DLLs do Allegro; foi preciso ajustar o PATH do Windows.
 
 
 ## Contato
