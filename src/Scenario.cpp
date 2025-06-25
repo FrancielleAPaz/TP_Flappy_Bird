@@ -1,5 +1,6 @@
 #include "Scenario.hpp"
 #include "Game.hpp" // para GameState
+#include "Pipe.hpp"
 #include <algorithm>
 #include <cstdlib>
 #include <iostream>
