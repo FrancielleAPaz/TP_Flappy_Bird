@@ -23,6 +23,8 @@ class PlayerManager { //classe que é responsável por todo o sistema de cadastr
         void salvarEmArquivo(const string& filename) const;
         void carregarDeArquivo(const string& filename);
         void listarJogadores() const;
+        const std::map<std::string, Player>& getPlayersMap() const;
+
 };
 
 #endif

@@ -19,15 +19,13 @@ Scenario::Scenario() {
     pipeSpeed = 4.0f;
     spaceBetweenPipes = 180.f;
     pipeSpawnCounter = 0;
-    //addScoreFlag = false;
     lastGapY = 250;
 
-    // O carregamento real vem depois...
 }
-
+// carregando todos os recursos em uma unica função
 bool Scenario::carregarRecursos() {
     font = al_load_font("./assets/flappyfont.ttf", 36, 0);
-    background = al_load_bitmap("./assets/background.bmp");
+    background = al_load_bitmap("./assets/background.png");
     logo = al_load_bitmap("./assets/logo.bmp");
     button_play = al_load_bitmap("./assets/button_play.png");
     gameover_image = al_load_bitmap("./assets/gameover.png");
@@ -45,9 +43,6 @@ bool Scenario::carregarRecursos() {
 
     return true;
 }
-
-
-
 
 // Destrutor
 Scenario::~Scenario() {
