@@ -27,7 +27,6 @@ private:
     float pipeSpeed;
     float spaceBetweenPipes;
     int pipeSpawnCounter;
-    //bool addScoreFlag;
     int lastGapY;
 
     ALLEGRO_BITMAP* background;
@@ -53,8 +52,6 @@ public:
     std::shared_ptr<Bird> getBird() const;
     ALLEGRO_FONT* getFont() const;
     ALLEGRO_BITMAP* getBackground() const;
-    //bool getAddScoreFlag() const;  
-    //void update();
     bool updateAndCheckScore();
     void draw(GameState state);
     void reset();

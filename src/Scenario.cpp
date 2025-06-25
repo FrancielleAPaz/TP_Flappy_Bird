@@ -19,12 +19,10 @@ Scenario::Scenario() {
     pipeSpeed = 4.0f;
     spaceBetweenPipes = 180.f;
     pipeSpawnCounter = 0;
-    //addScoreFlag = false;
     lastGapY = 250;
 
-    // O carregamento real vem depois...
 }
-
+// carregando todos os recursos em uma unica função
 bool Scenario::carregarRecursos() {
     font = al_load_font("./assets/flappyfont.ttf", 36, 0);
     background = al_load_bitmap("./assets/background.png");

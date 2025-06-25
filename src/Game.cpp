@@ -64,10 +64,6 @@ Game::Game() {
     if (!som_score) std::cerr << "[ERRO] Não foi possível carregar score.wav\n";
 
 
-    // if (!som_pulo || !som_morte || !trilha) {
-    //     std::cerr << "[ERRO] Falha ao carregar algum dos arquivos de áudio.\n";
-    //     exit(1);
-    // }
 
     if (trilha) {
         al_attach_audio_stream_to_mixer(trilha, al_get_default_mixer());
