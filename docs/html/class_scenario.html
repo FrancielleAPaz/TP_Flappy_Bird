@@ -88,8 +88,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aa7e7548858cbc52614d46723c0333038"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7826fdfb7fafd54f8201f52afd87313e" id="r_a7826fdfb7fafd54f8201f52afd87313e"><td class="memItemLeft" align="right" valign="top">std::shared_ptr&lt; <a class="el" href="class_bird.html">Bird</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7826fdfb7fafd54f8201f52afd87313e">getBird</a> () const</td></tr>
 <tr class="separator:a7826fdfb7fafd54f8201f52afd87313e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a038ee23a592066c45d201a42cd2b799d" id="r_a038ee23a592066c45d201a42cd2b799d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a038ee23a592066c45d201a42cd2b799d">update</a> ()</td></tr>
-<tr class="separator:a038ee23a592066c45d201a42cd2b799d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9f0f4bc232463c0626e6f7eb4c416c3f" id="r_a9f0f4bc232463c0626e6f7eb4c416c3f"><td class="memItemLeft" align="right" valign="top">ALLEGRO_FONT *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9f0f4bc232463c0626e6f7eb4c416c3f">getFont</a> () const</td></tr>
+<tr class="separator:a9f0f4bc232463c0626e6f7eb4c416c3f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbaeed179e6ebc491e34659392b322cf" id="r_afbaeed179e6ebc491e34659392b322cf"><td class="memItemLeft" align="right" valign="top">ALLEGRO_BITMAP *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbaeed179e6ebc491e34659392b322cf">getBackground</a> () const</td></tr>
+<tr class="separator:afbaeed179e6ebc491e34659392b322cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adb9acf5b0b703633066ced4b599ada45" id="r_adb9acf5b0b703633066ced4b599ada45"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#adb9acf5b0b703633066ced4b599ada45">updateAndCheckScore</a> ()</td></tr>
+<tr class="separator:adb9acf5b0b703633066ced4b599ada45"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa93a316c5e5651b57e626d94d359b67" id="r_afa93a316c5e5651b57e626d94d359b67"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afa93a316c5e5651b57e626d94d359b67">draw</a> (<a class="el" href="_game_8hpp.html#a7899b65f1ea0f655e4bbf8d2a5714285">GameState</a> state)</td></tr>
 <tr class="separator:afa93a316c5e5651b57e626d94d359b67"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a5a2201cff446cd8722d47930851654ff" id="r_a5a2201cff446cd8722d47930851654ff"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5a2201cff446cd8722d47930851654ff">reset</a> ()</td></tr>
@@ -211,6 +215,23 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="afbaeed179e6ebc491e34659392b322cf" name="afbaeed179e6ebc491e34659392b322cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbaeed179e6ebc491e34659392b322cf">&#9670;&#160;</a></span>getBackground()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ALLEGRO_BITMAP * Scenario::getBackground </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <a id="a7826fdfb7fafd54f8201f52afd87313e" name="a7826fdfb7fafd54f8201f52afd87313e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7826fdfb7fafd54f8201f52afd87313e">&#9670;&#160;</a></span>getBird()</h2>
 
@@ -219,6 +240,23 @@ Public Member Functions</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">std::shared_ptr&lt; <a class="el" href="class_bird.html">Bird</a> &gt; Scenario::getBird </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a9f0f4bc232463c0626e6f7eb4c416c3f" name="a9f0f4bc232463c0626e6f7eb4c416c3f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9f0f4bc232463c0626e6f7eb4c416c3f">&#9670;&#160;</a></span>getFont()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">ALLEGRO_FONT * Scenario::getFont </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td> const</td>
@@ -304,14 +342,14 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
-<a id="a038ee23a592066c45d201a42cd2b799d" name="a038ee23a592066c45d201a42cd2b799d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a038ee23a592066c45d201a42cd2b799d">&#9670;&#160;</a></span>update()</h2>
+<a id="adb9acf5b0b703633066ced4b599ada45" name="adb9acf5b0b703633066ced4b599ada45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adb9acf5b0b703633066ced4b599ada45">&#9670;&#160;</a></span>updateAndCheckScore()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">void Scenario::update </td>
+          <td class="memname">bool Scenario::updateAndCheckScore </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"></span></td><td>)</td>
           <td></td>

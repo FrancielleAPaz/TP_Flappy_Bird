@@ -12,40 +12,63 @@
 \DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_audio.h>}}
 \DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <allegro5/allegro\_acodec.h>}}
 \DoxyCodeLine{00010\ }
-\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_scenario_8hpp}{Scenario.hpp}}"{}}}
-\DoxyCodeLine{00012\ \textcolor{comment}{//\#include\ "{}PlayerManager.hpp"{}}}
-\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{GameState}}\ \{}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285a7029f55c7a129acffb97df66f9ec4406}{INICIO}},}
-\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285a863eb564d66c05afcb9bd643dd70db4b}{JOGANDO}},}
-\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285a6cbdc1f5ba9f49fd273e642d4ef595b2}{PERDEU}}}
-\DoxyCodeLine{00019\ \};}
-\DoxyCodeLine{00020\ }
-\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game}{Game}}\ \{}
-\DoxyCodeLine{00022\ \textcolor{keyword}{private}:}
-\DoxyCodeLine{00023\ \ \ \ \ ALLEGRO\_DISPLAY*\ display;}
-\DoxyCodeLine{00024\ \ \ \ \ ALLEGRO\_EVENT\_QUEUE*\ event\_queue;}
-\DoxyCodeLine{00025\ \ \ \ \ ALLEGRO\_TIMER*\ timer;}
-\DoxyCodeLine{00026\ \ \ \ \ ALLEGRO\_SAMPLE*\ som\_pulo;}
-\DoxyCodeLine{00027\ \ \ \ \ ALLEGRO\_SAMPLE*\ som\_morte;}
-\DoxyCodeLine{00028\ \ \ \ \ ALLEGRO\_AUDIO\_STREAM*\ trilha;}
-\DoxyCodeLine{00029\ }
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ running;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_scenario_8hpp}{Scenario.hpp}}"{}}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{_player_manager_8hpp}{PlayerManager.hpp}}"{}}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{GameState}}\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285a7029f55c7a129acffb97df66f9ec4406}{INICIO}},}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285a863eb564d66c05afcb9bd643dd70db4b}{JOGANDO}},}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285a6cbdc1f5ba9f49fd273e642d4ef595b2}{PERDEU}}}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_game}{Game}}\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00024\ \ \ \ \ ALLEGRO\_DISPLAY*\ display;}
+\DoxyCodeLine{00025\ \ \ \ \ ALLEGRO\_EVENT\_QUEUE*\ event\_queue;}
+\DoxyCodeLine{00026\ \ \ \ \ ALLEGRO\_TIMER*\ timer;}
+\DoxyCodeLine{00027\ \ \ \ \ ALLEGRO\_SAMPLE*\ som\_pulo;}
+\DoxyCodeLine{00028\ \ \ \ \ ALLEGRO\_SAMPLE*\ som\_morte;}
+\DoxyCodeLine{00029\ \ \ \ \ ALLEGRO\_AUDIO\_STREAM*\ trilha;}
+\DoxyCodeLine{00030\ \ \ \ \ ALLEGRO\_SAMPLE*\ som\_score;}
 \DoxyCodeLine{00031\ }
-\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{GameState}}\ currentState;}
-\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{class_scenario}{Scenario}}\ scenario;}
-\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//PlayerManager\ playerManager;}}
-\DoxyCodeLine{00035\ \ \ \ \ std::string\ jogadorAtual;}
-\DoxyCodeLine{00036\ }
-\DoxyCodeLine{00037\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}}();}
-\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{class_game_ae3d112ca6e0e55150d2fdbc704474530}{\string~Game}}();}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ running;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{GameState}}\ currentState;}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{class_scenario}{Scenario}}\ scenario;}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{class_player_manager}{PlayerManager}}\ playerManager;}
+\DoxyCodeLine{00037\ \ \ \ \ std::string\ jogadorAtual;}
+\DoxyCodeLine{00038\ \ \ \ \ std::string\ nomeDigitado\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ nomeConfirmado\ =\ \textcolor{keyword}{false};}
 \DoxyCodeLine{00040\ }
-\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a2207d745ca2e5aa0fe77feb4aae51700}{run}}(\textcolor{keyword}{const}\ std::string\&\ apelido);}
-\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a139cd11fdbc835c935e7f04373ebb9d4}{handleInput}}(\textcolor{keywordtype}{int});}
-\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a8e8d1f6410bd0188e106cf795c87b8e5}{showGameOver}}();}
-\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a32a8f6a17e1e95df3f2f7a3b7bc8f99b}{startNewRound}}();}
-\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00041\ \ \ \ \ std::string\ opcaoDigitada\ =\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{char}\ opcaoEscolhida\ =\ \textcolor{charliteral}{'\(\backslash\)0'};}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ opcaoConfirmada\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00044\ \ \ \ \ std::string\ mensagemMenu\ =\ \textcolor{stringliteral}{"{}"{}};\ \textcolor{comment}{//\ Para\ mensagens\ como\ "{}Jogador\ criado"{}\ ou\ "{}Jogador\ não\ encontrado"{}}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ std::string\ apelidoParaRemover;}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ remocaoConfirmada\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ showCursor\ =\ \textcolor{keyword}{true};\ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{double}\ cursorTimer\ =\ 0.0;\ }
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{double}\ CURSOR\_BLINK\_RATE\ =\ 0.5;}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{void}\ telaInserirJogador();}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ telaRemoverJogador();}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ telaMostrarPlacar();}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ Menu();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{class_game_ad59df6562a58a614fda24622d3715b65}{Game}}();}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{class_game_ae3d112ca6e0e55150d2fdbc704474530}{\string~Game}}();}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a1ab78f5ed0d5ea879157357cf2fb2afa}{run}}();}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a139cd11fdbc835c935e7f04373ebb9d4}{handleInput}}(\textcolor{keywordtype}{int});}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a8e8d1f6410bd0188e106cf795c87b8e5}{showGameOver}}();}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_game_a32a8f6a17e1e95df3f2f7a3b7bc8f99b}{startNewRound}}();}
+\DoxyCodeLine{00068\ \};}
 
 \end{DoxyCode}

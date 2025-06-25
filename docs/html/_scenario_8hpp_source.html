@@ -113,32 +113,32 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>    <span class="keywordtype">float</span> pipeSpeed;</div>
 <div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>    <span class="keywordtype">float</span> spaceBetweenPipes;</div>
 <div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span>    <span class="keywordtype">int</span> pipeSpawnCounter;</div>
-<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">bool</span> addScoreFlag;</div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span>    <span class="keywordtype">int</span> lastGapY;</div>
 <div class="line"><a id="l00031" name="l00031"></a><span class="lineno">   31</span> </div>
 <div class="line"><a id="l00032" name="l00032"></a><span class="lineno">   32</span>    ALLEGRO_BITMAP* background;</div>
 <div class="line"><a id="l00033" name="l00033"></a><span class="lineno">   33</span>    ALLEGRO_BITMAP* logo;</div>
 <div class="line"><a id="l00034" name="l00034"></a><span class="lineno">   34</span>    ALLEGRO_BITMAP* gameover_image;</div>
-<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ALLEGRO_BITMAP* floor_image;</div>
-<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    ALLEGRO_FONT* font;</div>
-<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    ALLEGRO_BITMAP* button_play;</div>
-<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    ALLEGRO_BITMAP* topPipeImage;</div>
-<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    ALLEGRO_BITMAP* bottomPipeImage;</div>
-<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span>    ALLEGRO_BITMAP* birdImage;</div>
-<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span> </div>
-<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="comment">// Coordenadas e tamanhos do button_play</span></div>
-<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">float</span> playBtnX = 440;</div>
-<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">float</span> playBtnY = 200;</div>
-<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">float</span> playBtnW = 120;</div>
-<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span>    <span class="keywordtype">float</span> playBtnH = 60;</div>
+<div class="line"><a id="l00035" name="l00035"></a><span class="lineno">   35</span>    ALLEGRO_FONT* font;</div>
+<div class="line"><a id="l00036" name="l00036"></a><span class="lineno">   36</span>    ALLEGRO_BITMAP* button_play;</div>
+<div class="line"><a id="l00037" name="l00037"></a><span class="lineno">   37</span>    ALLEGRO_BITMAP* topPipeImage;</div>
+<div class="line"><a id="l00038" name="l00038"></a><span class="lineno">   38</span>    ALLEGRO_BITMAP* bottomPipeImage;</div>
+<div class="line"><a id="l00039" name="l00039"></a><span class="lineno">   39</span>    ALLEGRO_BITMAP* birdImage;</div>
+<div class="line"><a id="l00040" name="l00040"></a><span class="lineno">   40</span> </div>
+<div class="line"><a id="l00041" name="l00041"></a><span class="lineno">   41</span>    <span class="comment">// Coordenadas e tamanhos do button_play</span></div>
+<div class="line"><a id="l00042" name="l00042"></a><span class="lineno">   42</span>    <span class="keywordtype">float</span> playBtnX = 440;</div>
+<div class="line"><a id="l00043" name="l00043"></a><span class="lineno">   43</span>    <span class="keywordtype">float</span> playBtnY = 200;</div>
+<div class="line"><a id="l00044" name="l00044"></a><span class="lineno">   44</span>    <span class="keywordtype">float</span> playBtnW = 120;</div>
+<div class="line"><a id="l00045" name="l00045"></a><span class="lineno">   45</span>    <span class="keywordtype">float</span> playBtnH = 60;</div>
+<div class="line"><a id="l00046" name="l00046"></a><span class="lineno">   46</span> </div>
 <div class="line"><a id="l00047" name="l00047"></a><span class="lineno">   47</span> </div>
-<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span>    <span class="keywordtype">int</span> cx1, cx2; <span class="comment">// Para o movimento do chão</span></div>
-<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span> </div>
-<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span>    <a class="code hl_function" href="class_scenario.html#ac81a05dad61b30116332ea971359a41e">Scenario</a>();</div>
-<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    <a class="code hl_function" href="class_scenario.html#aa7e7548858cbc52614d46723c0333038">~Scenario</a>();</div>
-<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span> </div>
-<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    std::shared_ptr&lt;Bird&gt; <a class="code hl_function" href="class_scenario.html#a7826fdfb7fafd54f8201f52afd87313e">getBird</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scenario.html#a038ee23a592066c45d201a42cd2b799d">update</a>();</div>
+<div class="line"><a id="l00048" name="l00048"></a><span class="lineno">   48</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00049" name="l00049"></a><span class="lineno">   49</span>    <a class="code hl_function" href="class_scenario.html#ac81a05dad61b30116332ea971359a41e">Scenario</a>();</div>
+<div class="line"><a id="l00050" name="l00050"></a><span class="lineno">   50</span>    <a class="code hl_function" href="class_scenario.html#aa7e7548858cbc52614d46723c0333038">~Scenario</a>();</div>
+<div class="line"><a id="l00051" name="l00051"></a><span class="lineno">   51</span> </div>
+<div class="line"><a id="l00052" name="l00052"></a><span class="lineno">   52</span>    std::shared_ptr&lt;Bird&gt; <a class="code hl_function" href="class_scenario.html#a7826fdfb7fafd54f8201f52afd87313e">getBird</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00053" name="l00053"></a><span class="lineno">   53</span>    ALLEGRO_FONT* <a class="code hl_function" href="class_scenario.html#a9f0f4bc232463c0626e6f7eb4c416c3f">getFont</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00054" name="l00054"></a><span class="lineno">   54</span>    ALLEGRO_BITMAP* <a class="code hl_function" href="class_scenario.html#afbaeed179e6ebc491e34659392b322cf">getBackground</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00055" name="l00055"></a><span class="lineno">   55</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_scenario.html#adb9acf5b0b703633066ced4b599ada45">updateAndCheckScore</a>();</div>
 <div class="line"><a id="l00056" name="l00056"></a><span class="lineno">   56</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scenario.html#afa93a316c5e5651b57e626d94d359b67">draw</a>(<a class="code hl_enumeration" href="_game_8hpp.html#a7899b65f1ea0f655e4bbf8d2a5714285">GameState</a> state);</div>
 <div class="line"><a id="l00057" name="l00057"></a><span class="lineno">   57</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scenario.html#a5a2201cff446cd8722d47930851654ff">reset</a>();</div>
 <div class="line"><a id="l00058" name="l00058"></a><span class="lineno">   58</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scenario.html#acba9d5eaf01852971b7b93e2f83b4200">addPipe</a>();</div>
@@ -146,27 +146,29 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00060" name="l00060"></a><span class="lineno">   60</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="class_scenario.html#ac13f56cc04ea28f1ab7ea905c31a9c39">setDifficulty</a>(<span class="keywordtype">float</span> gravity, <span class="keywordtype">float</span> pipeSpeed);</div>
 <div class="line"><a id="l00061" name="l00061"></a><span class="lineno">   61</span>    <span class="keywordtype">int</span> <a class="code hl_function" href="class_scenario.html#ab66180ec4015536e2ef14b40a78a6616">getScore</a>() <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00062" name="l00062"></a><span class="lineno">   62</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_scenario.html#a2effdb2ec99f959c023bb940f7b7a64c">carregarRecursos</a>(); <span class="comment">// Retorna true se tudo carregou corretamente</span></div>
-<div class="line"><a id="l00063" name="l00063"></a><span class="lineno">   63</span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_scenario.html#a3e347f28a4e0f4ad199a29c84eba6792">isPlayButtonClicked</a>(<span class="keywordtype">int</span> mouseX, <span class="keywordtype">int</span> mouseY) <span class="keyword">const</span>;</div>
+<div class="line"><a id="l00063" name="l00063"></a><span class="lineno"><a class="line" href="class_scenario.html#a3e347f28a4e0f4ad199a29c84eba6792">   63</a></span>    <span class="keywordtype">bool</span> <a class="code hl_function" href="class_scenario.html#a3e347f28a4e0f4ad199a29c84eba6792">isPlayButtonClicked</a>(<span class="keywordtype">int</span> mouseX, <span class="keywordtype">int</span> mouseY) <span class="keyword">const</span>;</div>
 <div class="line"><a id="l00064" name="l00064"></a><span class="lineno">   64</span> </div>
 <div class="line"><a id="l00065" name="l00065"></a><span class="lineno">   65</span>};</div>
 </div>
 <div class="ttc" id="a_bird_8hpp_html"><div class="ttname"><a href="_bird_8hpp.html">Bird.hpp</a></div></div>
-<div class="ttc" id="a_game_8hpp_html_a7899b65f1ea0f655e4bbf8d2a5714285"><div class="ttname"><a href="_game_8hpp.html#a7899b65f1ea0f655e4bbf8d2a5714285">GameState</a></div><div class="ttdeci">GameState</div><div class="ttdef"><b>Definition</b> Game.hpp:15</div></div>
+<div class="ttc" id="a_game_8hpp_html_a7899b65f1ea0f655e4bbf8d2a5714285"><div class="ttname"><a href="_game_8hpp.html#a7899b65f1ea0f655e4bbf8d2a5714285">GameState</a></div><div class="ttdeci">GameState</div><div class="ttdef"><b>Definition</b> Game.hpp:16</div></div>
 <div class="ttc" id="a_pipe_8hpp_html"><div class="ttname"><a href="_pipe_8hpp.html">Pipe.hpp</a></div></div>
-<div class="ttc" id="aclass_game_html"><div class="ttname"><a href="class_game.html">Game</a></div><div class="ttdef"><b>Definition</b> Game.hpp:21</div></div>
+<div class="ttc" id="aclass_game_html"><div class="ttname"><a href="class_game.html">Game</a></div><div class="ttdef"><b>Definition</b> Game.hpp:22</div></div>
 <div class="ttc" id="aclass_scenario_html"><div class="ttname"><a href="class_scenario.html">Scenario</a></div><div class="ttdef"><b>Definition</b> Scenario.hpp:17</div></div>
-<div class="ttc" id="aclass_scenario_html_a038ee23a592066c45d201a42cd2b799d"><div class="ttname"><a href="class_scenario.html#a038ee23a592066c45d201a42cd2b799d">Scenario::update</a></div><div class="ttdeci">void update()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:74</div></div>
 <div class="ttc" id="aclass_scenario_html_a2effdb2ec99f959c023bb940f7b7a64c"><div class="ttname"><a href="class_scenario.html#a2effdb2ec99f959c023bb940f7b7a64c">Scenario::carregarRecursos</a></div><div class="ttdeci">bool carregarRecursos()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:29</div></div>
-<div class="ttc" id="aclass_scenario_html_a3e347f28a4e0f4ad199a29c84eba6792"><div class="ttname"><a href="class_scenario.html#a3e347f28a4e0f4ad199a29c84eba6792">Scenario::isPlayButtonClicked</a></div><div class="ttdeci">bool isPlayButtonClicked(int mouseX, int mouseY) const</div><div class="ttdef"><b>Definition</b> Scenario.cpp:225</div></div>
-<div class="ttc" id="aclass_scenario_html_a5a2201cff446cd8722d47930851654ff"><div class="ttname"><a href="class_scenario.html#a5a2201cff446cd8722d47930851654ff">Scenario::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:151</div></div>
+<div class="ttc" id="aclass_scenario_html_a3e347f28a4e0f4ad199a29c84eba6792"><div class="ttname"><a href="class_scenario.html#a3e347f28a4e0f4ad199a29c84eba6792">Scenario::isPlayButtonClicked</a></div><div class="ttdeci">bool isPlayButtonClicked(int mouseX, int mouseY) const</div></div>
+<div class="ttc" id="aclass_scenario_html_a5a2201cff446cd8722d47930851654ff"><div class="ttname"><a href="class_scenario.html#a5a2201cff446cd8722d47930851654ff">Scenario::reset</a></div><div class="ttdeci">void reset()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:167</div></div>
 <div class="ttc" id="aclass_scenario_html_a7826fdfb7fafd54f8201f52afd87313e"><div class="ttname"><a href="class_scenario.html#a7826fdfb7fafd54f8201f52afd87313e">Scenario::getBird</a></div><div class="ttdeci">std::shared_ptr&lt; Bird &gt; getBird() const</div><div class="ttdef"><b>Definition</b> Scenario.cpp:69</div></div>
-<div class="ttc" id="aclass_scenario_html_aa7e7548858cbc52614d46723c0333038"><div class="ttname"><a href="class_scenario.html#aa7e7548858cbc52614d46723c0333038">Scenario::~Scenario</a></div><div class="ttdeci">~Scenario()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:56</div></div>
-<div class="ttc" id="aclass_scenario_html_ab66180ec4015536e2ef14b40a78a6616"><div class="ttname"><a href="class_scenario.html#ab66180ec4015536e2ef14b40a78a6616">Scenario::getScore</a></div><div class="ttdeci">int getScore() const</div><div class="ttdef"><b>Definition</b> Scenario.cpp:219</div></div>
-<div class="ttc" id="aclass_scenario_html_ac13f56cc04ea28f1ab7ea905c31a9c39"><div class="ttname"><a href="class_scenario.html#ac13f56cc04ea28f1ab7ea905c31a9c39">Scenario::setDifficulty</a></div><div class="ttdeci">void setDifficulty(float gravity, float pipeSpeed)</div><div class="ttdef"><b>Definition</b> Scenario.cpp:213</div></div>
-<div class="ttc" id="aclass_scenario_html_ac81a05dad61b30116332ea971359a41e"><div class="ttname"><a href="class_scenario.html#ac81a05dad61b30116332ea971359a41e">Scenario::Scenario</a></div><div class="ttdeci">Scenario()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:13</div></div>
-<div class="ttc" id="aclass_scenario_html_acba9d5eaf01852971b7b93e2f83b4200"><div class="ttname"><a href="class_scenario.html#acba9d5eaf01852971b7b93e2f83b4200">Scenario::addPipe</a></div><div class="ttdeci">void addPipe()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:162</div></div>
-<div class="ttc" id="aclass_scenario_html_af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7"><div class="ttname"><a href="class_scenario.html#af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7">Scenario::checkCollision</a></div><div class="ttdeci">bool checkCollision()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:196</div></div>
-<div class="ttc" id="aclass_scenario_html_afa93a316c5e5651b57e626d94d359b67"><div class="ttname"><a href="class_scenario.html#afa93a316c5e5651b57e626d94d359b67">Scenario::draw</a></div><div class="ttdeci">void draw(GameState state)</div><div class="ttdef"><b>Definition</b> Scenario.cpp:116</div></div>
+<div class="ttc" id="aclass_scenario_html_a9f0f4bc232463c0626e6f7eb4c416c3f"><div class="ttname"><a href="class_scenario.html#a9f0f4bc232463c0626e6f7eb4c416c3f">Scenario::getFont</a></div><div class="ttdeci">ALLEGRO_FONT * getFont() const</div><div class="ttdef"><b>Definition</b> Scenario.cpp:76</div></div>
+<div class="ttc" id="aclass_scenario_html_aa7e7548858cbc52614d46723c0333038"><div class="ttname"><a href="class_scenario.html#aa7e7548858cbc52614d46723c0333038">Scenario::~Scenario</a></div><div class="ttdeci">~Scenario()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:57</div></div>
+<div class="ttc" id="aclass_scenario_html_ab66180ec4015536e2ef14b40a78a6616"><div class="ttname"><a href="class_scenario.html#ab66180ec4015536e2ef14b40a78a6616">Scenario::getScore</a></div><div class="ttdeci">int getScore() const</div><div class="ttdef"><b>Definition</b> Scenario.cpp:254</div></div>
+<div class="ttc" id="aclass_scenario_html_ac13f56cc04ea28f1ab7ea905c31a9c39"><div class="ttname"><a href="class_scenario.html#ac13f56cc04ea28f1ab7ea905c31a9c39">Scenario::setDifficulty</a></div><div class="ttdeci">void setDifficulty(float gravity, float pipeSpeed)</div><div class="ttdef"><b>Definition</b> Scenario.cpp:240</div></div>
+<div class="ttc" id="aclass_scenario_html_ac81a05dad61b30116332ea971359a41e"><div class="ttname"><a href="class_scenario.html#ac81a05dad61b30116332ea971359a41e">Scenario::Scenario</a></div><div class="ttdeci">Scenario()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:16</div></div>
+<div class="ttc" id="aclass_scenario_html_acba9d5eaf01852971b7b93e2f83b4200"><div class="ttname"><a href="class_scenario.html#acba9d5eaf01852971b7b93e2f83b4200">Scenario::addPipe</a></div><div class="ttdeci">void addPipe()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:176</div></div>
+<div class="ttc" id="aclass_scenario_html_adb9acf5b0b703633066ced4b599ada45"><div class="ttname"><a href="class_scenario.html#adb9acf5b0b703633066ced4b599ada45">Scenario::updateAndCheckScore</a></div><div class="ttdeci">bool updateAndCheckScore()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:91</div></div>
+<div class="ttc" id="aclass_scenario_html_af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7"><div class="ttname"><a href="class_scenario.html#af3d3f3a1bcc8ca3d1b5c9e16e5ab1cb7">Scenario::checkCollision</a></div><div class="ttdeci">bool checkCollision()</div><div class="ttdef"><b>Definition</b> Scenario.cpp:214</div></div>
+<div class="ttc" id="aclass_scenario_html_afa93a316c5e5651b57e626d94d359b67"><div class="ttname"><a href="class_scenario.html#afa93a316c5e5651b57e626d94d359b67">Scenario::draw</a></div><div class="ttdeci">void draw(GameState state)</div><div class="ttdef"><b>Definition</b> Scenario.cpp:136</div></div>
+<div class="ttc" id="aclass_scenario_html_afbaeed179e6ebc491e34659392b322cf"><div class="ttname"><a href="class_scenario.html#afbaeed179e6ebc491e34659392b322cf">Scenario::getBackground</a></div><div class="ttdeci">ALLEGRO_BITMAP * getBackground() const</div><div class="ttdef"><b>Definition</b> Scenario.cpp:83</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

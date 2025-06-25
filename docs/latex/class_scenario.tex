@@ -13,7 +13,11 @@
 \item 
 std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bird}{Bird}} $>$ \mbox{\hyperlink{class_scenario_a7826fdfb7fafd54f8201f52afd87313e}{get\+Bird}} () const
 \item 
-void \mbox{\hyperlink{class_scenario_a038ee23a592066c45d201a42cd2b799d}{update}} ()
+ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_scenario_a9f0f4bc232463c0626e6f7eb4c416c3f}{get\+Font}} () const
+\item 
+ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_scenario_afbaeed179e6ebc491e34659392b322cf}{get\+Background}} () const
+\item 
+bool \mbox{\hyperlink{class_scenario_adb9acf5b0b703633066ced4b599ada45}{update\+And\+Check\+Score}} ()
 \item 
 void \mbox{\hyperlink{class_scenario_afa93a316c5e5651b57e626d94d359b67}{draw}} (\mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}} state)
 \item 
@@ -73,11 +77,23 @@ bool \mbox{\hyperlink{class_scenario_a3e347f28a4e0f4ad199a29c84eba6792}{is\+Play
 \doxysubsubsection{\texorpdfstring{draw()}{draw()}}
 {\footnotesize\ttfamily void Scenario\+::draw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{_game_8hpp_a7899b65f1ea0f655e4bbf8d2a5714285}{Game\+State}}}]{state }\end{DoxyParamCaption})}
 
+\Hypertarget{class_scenario_afbaeed179e6ebc491e34659392b322cf}\label{class_scenario_afbaeed179e6ebc491e34659392b322cf} 
+\index{Scenario@{Scenario}!getBackground@{getBackground}}
+\index{getBackground@{getBackground}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{getBackground()}{getBackground()}}
+{\footnotesize\ttfamily ALLEGRO\+\_\+\+BITMAP \texorpdfstring{$\ast$}{*} Scenario\+::get\+Background (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
 \Hypertarget{class_scenario_a7826fdfb7fafd54f8201f52afd87313e}\label{class_scenario_a7826fdfb7fafd54f8201f52afd87313e} 
 \index{Scenario@{Scenario}!getBird@{getBird}}
 \index{getBird@{getBird}!Scenario@{Scenario}}
 \doxysubsubsection{\texorpdfstring{getBird()}{getBird()}}
 {\footnotesize\ttfamily std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{class_bird}{Bird}} $>$ Scenario\+::get\+Bird (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_scenario_a9f0f4bc232463c0626e6f7eb4c416c3f}\label{class_scenario_a9f0f4bc232463c0626e6f7eb4c416c3f} 
+\index{Scenario@{Scenario}!getFont@{getFont}}
+\index{getFont@{getFont}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{getFont()}{getFont()}}
+{\footnotesize\ttfamily ALLEGRO\+\_\+\+FONT \texorpdfstring{$\ast$}{*} Scenario\+::get\+Font (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
 
 \Hypertarget{class_scenario_ab66180ec4015536e2ef14b40a78a6616}\label{class_scenario_ab66180ec4015536e2ef14b40a78a6616} 
 \index{Scenario@{Scenario}!getScore@{getScore}}
@@ -103,11 +119,11 @@ bool \mbox{\hyperlink{class_scenario_a3e347f28a4e0f4ad199a29c84eba6792}{is\+Play
 \doxysubsubsection{\texorpdfstring{setDifficulty()}{setDifficulty()}}
 {\footnotesize\ttfamily void Scenario\+::set\+Difficulty (\begin{DoxyParamCaption}\item[{float}]{gravity,  }\item[{float}]{pipe\+Speed }\end{DoxyParamCaption})}
 
-\Hypertarget{class_scenario_a038ee23a592066c45d201a42cd2b799d}\label{class_scenario_a038ee23a592066c45d201a42cd2b799d} 
-\index{Scenario@{Scenario}!update@{update}}
-\index{update@{update}!Scenario@{Scenario}}
-\doxysubsubsection{\texorpdfstring{update()}{update()}}
-{\footnotesize\ttfamily void Scenario\+::update (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+\Hypertarget{class_scenario_adb9acf5b0b703633066ced4b599ada45}\label{class_scenario_adb9acf5b0b703633066ced4b599ada45} 
+\index{Scenario@{Scenario}!updateAndCheckScore@{updateAndCheckScore}}
+\index{updateAndCheckScore@{updateAndCheckScore}!Scenario@{Scenario}}
+\doxysubsubsection{\texorpdfstring{updateAndCheckScore()}{updateAndCheckScore()}}
+{\footnotesize\ttfamily bool Scenario\+::update\+And\+Check\+Score (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
 
 
 

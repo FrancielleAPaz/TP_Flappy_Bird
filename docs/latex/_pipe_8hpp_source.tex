@@ -15,26 +15,32 @@
 \DoxyCodeLine{00011\ \ \ \ \ ALLEGRO\_BITMAP*\ image;\ \ \ \ \ \ \textcolor{comment}{//\ Imagem\ do\ cano\ (específica\ para\ topo\ ou\ base)\ \ \ \ }}
 \DoxyCodeLine{00012\ \ \ \ \ \textcolor{keywordtype}{float}\ speed;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Velocidade\ horizontal}}
 \DoxyCodeLine{00013\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{float}\ WIDTH;\ \ \ \textcolor{comment}{//\ Largura\ padrão\ do\ cano}}
-\DoxyCodeLine{00014\ }
-\DoxyCodeLine{00015\ \textcolor{keyword}{public}:}
-\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{class_pipe_a733ceb68d275a1902aaf4a4a73327bac}{Pipe}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_ad4976cd29785cf9bd791148ff397c41e}{x}},\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a9ac54f1c686ecf5656139a829ed62041}{y}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b}{isTop}},\ ALLEGRO\_BITMAP*\ pipeImage);}
-\DoxyCodeLine{00017\ \ \ \ \ }
-\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Métodos\ obrigatórios}}
-\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_a5c21f37e6bf9ff0ee1c16fee62eb1039}{update}}()\ \textcolor{keyword}{override};}
-\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_adae5e64c88b105dc91670aeaad9bfe99}{draw}}()\ \textcolor{keyword}{const\ override};}
-\DoxyCodeLine{00021\ \ \ \ \ }
-\DoxyCodeLine{00022\ \ \ \ \ \textcolor{comment}{//\ Verifica\ colisão\ APENAS\ com\ Bird}}
-\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_adde5c27e7dd8097b3d53fd753d5c0df7}{checkCollision}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_game_object}{GameObject}}\&\ other)\ \textcolor{keyword}{const\ override};\ \ \ \ }
-\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Métodos\ específicos}}
-\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_aba62c5944ba5d7d1c3dc961968e0963d}{isOffScreen}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b}{isTop}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00027\ \ \ \ \ }
-\DoxyCodeLine{00028\ \ \ \ \ \textcolor{comment}{//\ Getters}}
-\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_pipe_a77ce646f3be408ec13c0517d64570881}{getWidth}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_pipe_a3caa27b4a5b2b0c0518fe5303f87d4c3}{getHeight}}()\ \textcolor{keyword}{const};}
-\DoxyCodeLine{00031\ \ \ \ \ }
-\DoxyCodeLine{00032\ \ \ \ \ \textcolor{comment}{//\ Setter\ para\ velocidade}}
-\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_aa66127299f6c88adaf82d4a31a79e3cc}{setSpeed}}(\textcolor{keywordtype}{float}\ s);}
-\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keywordtype}{bool}\ scored;\ \textcolor{comment}{//\ NOVO:\ Flag\ para\ rastrear\ se\ este\ cano\ já\ gerou\ um\ ponto}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_pipe_a733ceb68d275a1902aaf4a4a73327bac}{Pipe}}(\textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_ad4976cd29785cf9bd791148ff397c41e}{x}},\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_game_object_a9ac54f1c686ecf5656139a829ed62041}{y}},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b}{isTop}},\ ALLEGRO\_BITMAP*\ pipeImage);}
+\DoxyCodeLine{00019\ \ \ \ \ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ Métodos\ obrigatórios}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_a5c21f37e6bf9ff0ee1c16fee62eb1039}{update}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_adae5e64c88b105dc91670aeaad9bfe99}{draw}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00023\ \ \ \ \ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Verifica\ colisão\ APENAS\ com\ Bird}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_adde5c27e7dd8097b3d53fd753d5c0df7}{checkCollision}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{class_game_object}{GameObject}}\&\ other)\ \textcolor{keyword}{const\ override};\ \ \ \ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{comment}{//\ Métodos\ específicos}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_aba62c5944ba5d7d1c3dc961968e0963d}{isOffScreen}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_abb11e3faee03fb3760a6b92e40a95d0b}{isTop}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00029\ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_pipe_a77ce646f3be408ec13c0517d64570881}{getWidth}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_pipe_a3caa27b4a5b2b0c0518fe5303f87d4c3}{getHeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00033\ \ \ \ \ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Setter\ para\ velocidade}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_aa66127299f6c88adaf82d4a31a79e3cc}{setSpeed}}(\textcolor{keywordtype}{float}\ s);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ NOVO:\ Getters\ e\ Setters\ para\ a\ flag\ 'scored'}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{class_pipe_a5e7fe165070223c3d246c9df89eb6dbe}{getScored}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ scored;\ \}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_pipe_a1f436e349894a1bd6641302facfe6646}{setScored}}(\textcolor{keywordtype}{bool}\ s)\ \{\ scored\ =\ s;\ \}}
+\DoxyCodeLine{00040\ \};}
 
 \end{DoxyCode}
